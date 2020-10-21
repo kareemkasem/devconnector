@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 import gravatar from "gravatar";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 import User from "../models/user";
 
@@ -40,7 +41,22 @@ export const registerUser = async (req, res) => {
     const user = new User({ name, email, password: encryptedPassword, avatar });
     await user.save();
 
-    res.status(201).json({ message: "user added" });
+    // jwt auth
+    const payload = {
+      user: {
+        id: user.id,
+      },
+    };
+
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
   } catch (error) {
     res.status(500).json({ error: { msg: "server error" } });
   }

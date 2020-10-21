@@ -24,6 +24,7 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.8",
     "@types/gravatar": "^1.8.1",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/mongoose": "^5.7.36",
     "@types/node": "^14.14.0",
     "concurrently": "^5.3.0",
