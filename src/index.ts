@@ -4,7 +4,6 @@ import connectDB from "./config/db";
 import connectRoutes from "./config/routes";
 
 //vars
-const PORT = process.env.PORT || 3000;
 const app = express();
 
 // global middlewares
@@ -15,8 +14,8 @@ connectRoutes(app);
 
 // initializing
 try {
-  async () => await connectDB();
-  app.listen(PORT);
+  connectDB();
+  app.listen(process.env.PORT || 3000);
 } catch (error) {
   console.log("failed to connect");
   process.exit();
