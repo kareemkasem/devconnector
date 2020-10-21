@@ -6,7 +6,7 @@ const router = Router();
 
 // @route    POST api/users
 // @access   Public
-// @desc     adding users
+// @desc     registering users
 router.post(
   "/",
   [
