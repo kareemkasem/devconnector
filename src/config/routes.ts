@@ -1,7 +1,7 @@
-import usersRoutes from "../routes/api/users";
-import postsRoutes from "../routes/api/posts";
-import profileRoutes from "../routes/api/profile";
-import authRoutes from "../routes/api/auth";
+import usersRoutes from "../routes/users";
+import postsRoutes from "../routes/posts";
+import profileRoutes from "../routes/profile";
+import authRoutes from "../routes/auth";
 
 export default (app) => {
   app.use("/api/users", usersRoutes);
