@@ -35,10 +35,10 @@ export default async (req, res) => {
     });
 
     //encrypting password
-    const encryptedPassword = await bcrypt.hash(password, 12);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     //saving user
-    const user = new User({ name, email, password: encryptedPassword, avatar });
+    const user = new User({ name, email, password: hashedPassword, avatar });
     await user.save();
 
     // jwt auth

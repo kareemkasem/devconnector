@@ -5,7 +5,7 @@ export default (req, res, next) => {
   if (!token) {
     return res
       .status(401)
-      .json({ error: { msg: "not token found, unautherized" } });
+      .json({ error: { msg: "no token found, unautherized" } });
   }
 
   try {
