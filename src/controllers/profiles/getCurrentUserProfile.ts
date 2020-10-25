@@ -1,5 +1,4 @@
 import Profile from "../../models/profile";
-import User from "../../models/user";
 
 export default async (req, res) => {
   try {
@@ -8,7 +7,7 @@ export default async (req, res) => {
     }).populate("user", ["name", "avatar"]);
 
     if (!profile) {
-      return res.status(500).json({ error: { msg: "profile not found" } });
+      return res.status(404).json({ error: { msg: "profile not found" } });
     }
   } catch (error) {
     console.log(error);

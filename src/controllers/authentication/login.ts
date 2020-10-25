@@ -17,7 +17,7 @@ export default async (req, res) => {
     // check if email exist
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({
+      return res.status(404).json({
         errors: [
           {
             msg: "user not found",
