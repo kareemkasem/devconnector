@@ -70,7 +70,7 @@ export default async (req, res) => {
         { $set: profileFields },
         { new: true } // defaults to false which will return the original document
       );
-      res.json(profile);
+      res.status(201).json(profile);
     } else {
       const profile = new Profile(profileFields);
       await profile.save();

@@ -3,6 +3,8 @@ import { check } from "express-validator";
 
 import auth from "../middleware/auth";
 import getCurrentUserProfile from "../controllers/profiles/getCurrentUserProfile";
+import getAllProfiles from "../controllers/profiles/getAllProfiles";
+import getUserProfile from "../controllers/profiles/getUserProfile";
 import postProfile from "../controllers/profiles/postProfile";
 
 const router = Router();
@@ -11,6 +13,16 @@ const router = Router();
 // @access   Private
 // @desc     get current user profile
 router.get("/me", auth, getCurrentUserProfile);
+
+// @route    GET api/profile/all
+// @access   Private
+// @desc     get all user profiles
+router.get("/all", getAllProfiles);
+
+// @route    GET api/profile/:userId
+// @access   Private
+// @desc     get all user profiles
+router.get("/:userId", getUserProfile);
 
 // @route    POST api/profile
 // @access   Private
