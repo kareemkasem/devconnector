@@ -1,10 +1,11 @@
 import { validationResult } from "express-validator";
 import { profileReqBody } from "./profiles.types";
+import Profile from "../../models/profile";
 
 export default async (req, res) => {
   const errros = validationResult(req);
   if (!errros.isEmpty()) {
-    return res.staus(400).json({ errors: errros.array() });
+    return res.status(400).json({ errors: errros.array() });
   }
 
   const {
@@ -29,6 +30,7 @@ export default async (req, res) => {
     social: {},
   };
 
+  // adding optional fileds if exist
   const optionalFields = {
     bio,
     githubusername,
@@ -43,15 +45,37 @@ export default async (req, res) => {
     }
   }
 
+  // adding social links if exist
   for (const key in social) {
     if (social[key]) {
       profileFields.social[key] = social[key];
     }
   }
 
-  res.json(profileFields);
-
   try {
+    const profileExists =
+      (await Profile.findOne({
+        user: req.user.id,
+      }).countDocuments((err, count) => {
+        if (err) {
+          throw err;
+        } else {
+          return count;
+        }
+      })) == 1;
+
+    if (profileExists) {
+      const profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true } // defaults to false which will return the original document
+      );
+      res.json(profile);
+    } else {
+      const profile = new Profile(profileFields);
+      await profile.save();
+      res.json(profile);
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: { msg: "server error" } });
