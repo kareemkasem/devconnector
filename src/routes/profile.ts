@@ -6,6 +6,7 @@ import getCurrentUserProfile from "../controllers/profiles/getCurrentUserProfile
 import getAllProfiles from "../controllers/profiles/getAllProfiles";
 import getUserProfile from "../controllers/profiles/getUserProfile";
 import postProfile from "../controllers/profiles/postProfile";
+import getGithubRepos from "../controllers/profiles/getGithubRepos";
 
 const router = Router();
 
@@ -38,5 +39,10 @@ router.post(
   ],
   postProfile
 );
+
+// @route    GET api/profile/github/:username
+// @access   Private
+// @desc     get users github repos
+router.get("/github/:username", getGithubRepos);
 
 export default router;
