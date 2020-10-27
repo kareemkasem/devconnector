@@ -6,8 +6,12 @@ const postSchema = new Schema({
     type: ObjectId,
     ref: "users",
   },
-  title: String,
-  content: String,
+  username: String,
+  avatar: String,
+  content: {
+    type: String,
+    required: true,
+  },
   likes: [
     {
       type: ObjectId,
