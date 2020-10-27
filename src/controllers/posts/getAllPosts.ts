@@ -6,6 +6,6 @@ export default async (req: Request, res: Response) => {
     const posts = await Post.find().sort({ date: "asc" });
     res.json(posts);
   } catch (error) {
-    res.status(500).json({ error: { msg: "server error" } });
+    res.status(500).json({ errors: [{ msg: "server error" }] });
   }
 };

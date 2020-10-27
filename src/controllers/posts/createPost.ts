@@ -27,6 +27,6 @@ export default async (req, res) => {
     res.status(201).json(newPostDoc);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: { msg: "server error" } });
+    res.status(500).json({ errors: [{ msg: "server error" }] });
   }
 };

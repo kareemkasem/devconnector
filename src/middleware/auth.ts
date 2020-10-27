@@ -5,7 +5,7 @@ export default (req, res, next) => {
   if (!token) {
     return res
       .status(401)
-      .json({ error: { msg: "no token found, unautherized" } });
+      .json({ errors: [{ msg: "no token found, unautherized" }] });
   }
 
   try {
@@ -13,6 +13,6 @@ export default (req, res, next) => {
     req.user = decodedToken.user;
     next();
   } catch (error) {
-    return res.status(401).json({ error: { msg: "Token is invalid" } });
+    return res.status(401).json({ errors: [{ msg: "Token is invalid" }] });
   }
 };

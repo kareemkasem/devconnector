@@ -5,6 +5,6 @@ export default async (req, res) => {
     const profiles = await Profile.find().populate("user", ["name", "avatar"]);
     res.status(200).json(profiles);
   } catch (error) {
-    res.status(500).json({ error: { msg: "server error" } });
+    res.status(500).json({ errors: [{ msg: "server error" }] });
   }
 };
