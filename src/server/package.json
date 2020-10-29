@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node build/index.js",
-    "start-dev": "nodemon --exec ts-node src/index.ts",
+    "client": "cd ../client; yarn start",
+    "server": "nodemon --exec ts-node index.ts",
+    "start-dev": "concurrently \"yarn:server\" \"yarn:client\"",
     "build": "tsc"
   },
   "dependencies": {
