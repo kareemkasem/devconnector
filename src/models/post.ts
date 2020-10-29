@@ -25,9 +25,12 @@ const postSchema = new Schema({
         ref: "users",
       },
       avatar: String,
-      title: String,
+      username: String,
       content: String,
-      date: Date,
+      date: {
+        type: Date,
+        default: Date.now(),
+      },
     },
   ],
   date: {

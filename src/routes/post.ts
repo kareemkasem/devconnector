@@ -7,6 +7,8 @@ import getPost from "../controllers/posts/getPost";
 import getAllPosts from "../controllers/posts/getAllPosts";
 import deletePost from "../controllers/posts/deletePost";
 import likeOrUnlikePost from "../controllers/posts/likeOrUnlikePost";
+import createComment from "../controllers/posts/createComment";
+import deleteComment from "../controllers/posts/deleteComment";
 
 const router = Router();
 
@@ -39,5 +41,20 @@ router.delete("/delete/:id", auth, deletePost);
 // @access   Private
 // @desc     like or unlike a post
 router.put("/like/:id", auth, likeOrUnlikePost);
+
+// @route    PUT api/post/comment/:postId
+// @access   Private
+// @desc     comment on a post
+router.put(
+  "/comment/:postId",
+  auth,
+  [check("content", "comment is empty").notEmpty({ ignore_whitespace: true })],
+  createComment
+);
+
+// @route    DELETE api/post/comment/:postId/:commentId
+// @access   Private
+// @desc     delete a comment
+router.delete("/deleteComment/:postId/:commentId", auth, deleteComment);
 
 export default router;
