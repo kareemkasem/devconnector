@@ -2,10 +2,10 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface formData {
-  name: String;
-  email: String;
-  password1: String;
-  password2: String;
+  name: string;
+  email: string;
+  password1: string;
+  password2: string;
 }
 
 export default function Signup() {
@@ -46,6 +46,7 @@ export default function Signup() {
             name="name"
             required
             onChange={onChange}
+            value={formData.name}
           />
         </div>
         <div className="form-group">
@@ -54,6 +55,7 @@ export default function Signup() {
             placeholder="Email Address"
             name="email"
             onChange={onChange}
+            value={formData.email}
           />
           <small className="form-text">
             This site uses Gravatar so if you want a profile image, use a
@@ -67,6 +69,7 @@ export default function Signup() {
             name="password"
             minLength={6}
             onChange={onChange}
+            value={formData.password1}
           />
         </div>
         <div className="form-group">
@@ -76,6 +79,7 @@ export default function Signup() {
             name="password2"
             minLength={6}
             onChange={onChange}
+            value={formData.password2}
           />
         </div>
         <button type="submit" className="btn btn-primary">
@@ -83,7 +87,7 @@ export default function Signup() {
         </button>
       </form>
       <p className="my-1">
-        Already have an account? <Link to="/login">Sign In</Link>
+        Already have an account? <Link to="/login">Log In</Link>
       </p>
     </>
   );
