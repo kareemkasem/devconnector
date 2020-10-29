@@ -8,7 +8,7 @@ export default async (req, res) => {
       headers: { "user-agent": "node.js" },
     };
 
-    request(options, (error, response, body) => {
+    request(options, (error, response) => {
       if (error) {
         return res.status(400).json({ errors: [{ msg: "an error occured." }] });
       }
@@ -17,7 +17,7 @@ export default async (req, res) => {
         return res.status(404).json({ errors: [{ msg: "user not found" }] });
       }
 
-      res.status(200).json(JSON.parse(body));
+      res.status(200).json(JSON.parse(response.body));
     });
   } catch (error) {
     res.status(500).json({ errors: [{ msg: "server error" }] });
