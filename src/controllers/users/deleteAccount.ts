@@ -6,7 +6,7 @@ export default async (req, res) => {
   try {
     await User.findByIdAndDelete(userId);
     await Profile.findOneAndRemove({ user: userId });
-    res.status(200).json({ success: { msg: "account deleted successfully" } });
+    res.status(200).json({ msg: "account deleted successfully" });
   } catch (error) {
     res.status(500).json({ errors: [{ msg: "server error" }] });
   }
