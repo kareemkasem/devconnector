@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   test: () => "test",
 });
 
-const store: Store<AppState, AppActionTypes> = createStore(
+const store: Store<AppState, any> = createStore(
   rootReducer,
   enhanceCompose(applyMiddleware(...middleware))
 );
