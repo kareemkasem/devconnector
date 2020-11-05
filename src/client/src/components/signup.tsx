@@ -1,15 +1,10 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { setAlert } from "../store/actions/alerts";
 
-interface formData {
-  name: string;
-  email: string;
-  password1: string;
-  password2: string;
-}
-
-export default function Signup() {
-  const [formData, setFormData] = useState<formData>({
+function Signup(props: SignupProps) {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     password1: "",
@@ -19,14 +14,14 @@ export default function Signup() {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
-      [e.currentTarget.name]: e.currentTarget.nodeValue,
+      [e.currentTarget.name]: e.currentTarget.value,
     });
   };
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (formData.password1 !== formData.password2) {
-      console.log("handle error here");
+      props.setAlert("passwords don't match", "danger");
     } else {
       console.log("handle success here");
     }
@@ -58,15 +53,14 @@ export default function Signup() {
             value={formData.email}
           />
           <small className="form-text">
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
+            This site uses Gravatar so if you want a profile image, use a Gravatar email
           </small>
         </div>
         <div className="form-group">
           <input
             type="password"
             placeholder="Password"
-            name="password"
+            name="password1"
             minLength={6}
             onChange={onChange}
             value={formData.password1}
@@ -91,4 +85,17 @@ export default function Signup() {
       </p>
     </>
   );
+}
+
+export default connect(null, { setAlert })(Signup);
+
+interface SignupProps {
+  setAlert: typeof setAlert;
+}
+
+interface FormData {
+  name: string;
+  email: string;
+  password1: string;
+  password2: string;
 }

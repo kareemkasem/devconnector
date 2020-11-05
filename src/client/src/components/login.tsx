@@ -1,13 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
-interface formData {
-  email: string;
-  password: string;
-}
-
 export default function Login() {
-  const [formData, setFormData] = useState<formData>({
+  const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
   });
@@ -15,7 +10,7 @@ export default function Login() {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
-      [e.currentTarget.name]: e.currentTarget.nodeValue,
+      [e.currentTarget.name]: e.currentTarget.value,
     });
   };
 
@@ -59,4 +54,9 @@ export default function Login() {
       </p>
     </>
   );
+}
+
+interface FormData {
+  email: string;
+  password: string;
 }

@@ -14,11 +14,14 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route path="/" exact component={Landing} />
-        <section className="container">
-          <Route path="/signup" exact component={Signup} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/profiles" exact component={Profiles} />
-        </section>
+        <>
+          {/* use <> inside Switch not anything else */}
+          <section className="container">
+            <Route path="/signup" exact component={Signup} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/profiles" exact component={Profiles} />
+          </section>
+        </>
       </Switch>
     </>
   );
