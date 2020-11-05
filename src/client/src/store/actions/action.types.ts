@@ -1,11 +1,11 @@
-import { Alert } from "../types";
+import { AlertType } from "../types";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
 
 export type SetAlerttype = {
   type: typeof SET_ALERT;
-  payload: Alert;
+  payload: AlertType;
 };
 export type RemoveAlertType = {
   type: typeof REMOVE_ALERT;

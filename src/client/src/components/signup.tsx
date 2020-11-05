@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../store/actions/alerts";
 
-function Signup(props: SignupProps) {
+function Signup({ setAlert }: SignupProps) {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -21,7 +21,7 @@ function Signup(props: SignupProps) {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (formData.password1 !== formData.password2) {
-      props.setAlert("passwords don't match", "danger");
+      setAlert("passwords don't match", "danger");
     } else {
       console.log("handle success here");
     }
