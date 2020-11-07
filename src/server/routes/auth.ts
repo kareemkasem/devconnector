@@ -13,7 +13,7 @@ const router = Router();
 // @desc     receive a user object if a jwt exists
 router.get("/", auth, authUser);
 
-// @route    POST api/users
+// @route    POST api/auth/signup
 // @access   Public
 // @desc     signup users
 router.post(
@@ -29,7 +29,7 @@ router.post(
   signup
 );
 
-// @route    POST api/users
+// @route    POST api/auth/login
 // @access   Public
 // @desc     login
 router.post(

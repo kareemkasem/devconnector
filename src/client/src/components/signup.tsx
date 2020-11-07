@@ -2,8 +2,9 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../store/actions/alerts";
+import { signup } from "../store/actions/auth";
 
-function Signup({ setAlert }: SignupProps) {
+function Signup({ setAlert, signup }: SignupProps) {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -23,7 +24,8 @@ function Signup({ setAlert }: SignupProps) {
     if (formData.password1 !== formData.password2) {
       setAlert("passwords don't match", "danger");
     } else {
-      console.log("handle success here");
+      const { name, email, password1 } = formData;
+      signup({ name, email, password: password1 });
     }
   };
 
@@ -39,7 +41,7 @@ function Signup({ setAlert }: SignupProps) {
             type="text"
             placeholder="Name"
             name="name"
-            required
+            // required
             onChange={onChange}
             value={formData.name}
           />
@@ -48,6 +50,7 @@ function Signup({ setAlert }: SignupProps) {
           <input
             type="email"
             placeholder="Email Address"
+            // required
             name="email"
             onChange={onChange}
             value={formData.email}
@@ -61,7 +64,7 @@ function Signup({ setAlert }: SignupProps) {
             type="password"
             placeholder="Password"
             name="password1"
-            minLength={6}
+            // minLength={6}
             onChange={onChange}
             value={formData.password1}
           />
@@ -71,7 +74,7 @@ function Signup({ setAlert }: SignupProps) {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            minLength={6}
+            // minLength={6}
             onChange={onChange}
             value={formData.password2}
           />
@@ -87,10 +90,11 @@ function Signup({ setAlert }: SignupProps) {
   );
 }
 
-export default connect(null, { setAlert })(Signup);
+export default connect(null, { setAlert, signup })(Signup);
 
 interface SignupProps {
   setAlert: typeof setAlert;
+  signup: any;
 }
 
 interface FormData {
