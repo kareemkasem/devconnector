@@ -1,29 +1,22 @@
+import { Dispatch } from "redux";
+import { v4 as uuid } from "uuid";
+import { AxiosResponse } from "axios";
+
+import AxiosRequest from "../../axios.config";
 import { SIGNUP_SUCCESS, SIGNUP_FAIL, SetAlertType, SET_ALERT } from "./action.types";
 import { SignupFailType, SignupSuccessType } from "./action.types";
 import { ServerError } from "../types";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Dispatch } from "redux";
-import { v4 as uuid } from "uuid";
 
 export const signup = ({ name, email, password }: SignupParams) => async (
   dispatch: Dispatch<SignupSuccessType | SignupFailType | SetAlertType>
 ) => {
   const data = { name, email, password };
 
-  const config: AxiosRequestConfig = {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "*/*",
-    },
-    baseURL: process.env.REACT_APP_BASEURL,
-  };
-
   try {
-    const result = await axios.post<SignupParams, AxiosResponse<{ token: string }>>(
-      "/api/auth/signup",
-      data,
-      config
-    );
+    const result = await AxiosRequest.post<
+      SignupParams,
+      AxiosResponse<{ token: string }>
+    >("/api/auth/signup", data);
 
     console.log(result);
 

@@ -3,6 +3,7 @@
   --primary-color: #17a2b8;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
+  --alert-background: rgb(252, 242, 223);
   --danger-color: #dc3545;
   --success-color: #28a745;
 }
@@ -152,8 +153,21 @@ img {
   padding: 0.8rem;
   margin: 1rem 0;
   opacity: 0.9;
-  background: var(--light-color);
-  color: #333;
+  background: var(--alert-background) !important;
+  color: #333 !important;
+  position: relative;
+  border: 3px solid;
+  border-radius: 8px;
+}
+
+.alert::after {
+  content: "X";
+  font-size: 1.2rem;
+  position: absolute;
+  right: 10px;
+  top: 25%;
+  cursor: pointer;
+  height: 50%;
 }
 
 .btn-primary,
@@ -168,6 +182,7 @@ img {
 .bg-light,
 .badge-light,
 .alert-light {
+  border-color: var(--light-color);
   background: var(--light-color);
   color: #333;
 }
@@ -176,6 +191,7 @@ img {
 .bg-dark,
 .badge-dark,
 .alert-dark {
+  border-color: var(--dark-color);
   background: var(--dark-color);
   color: #fff;
 }
@@ -184,6 +200,7 @@ img {
 .bg-danger,
 .badge-danger,
 .alert-danger {
+  border-color: var(--danger-color);
   background: var(--danger-color);
   color: #fff;
 }
@@ -192,6 +209,7 @@ img {
 .bg-success,
 .badge-success,
 .alert-success {
+  border-color: var(--success-color);
   background: var(--success-color);
   color: #fff;
 }
@@ -200,9 +218,9 @@ img {
 .bg-white,
 .badge-white,
 .alert-white {
+  border-color: #fff;
   background: #fff;
   color: #333;
-  border: #ccc solid 1px;
 }
 
 .btn:hover {
