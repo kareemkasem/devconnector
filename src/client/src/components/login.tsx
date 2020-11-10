@@ -1,7 +1,12 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default function Login() {
+import { login } from "../store/actions/auth";
+import { LoginParams } from "../global.types";
+import { AppState } from "../store/configureStore";
+
+function Login({ isAuthenticated, login }: LoginProps) {
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -15,9 +20,14 @@ export default function Login() {
   };
 
   const onSubmit = (e: FormEvent) => {
+    const { email, password } = formData;
     e.preventDefault();
-    console.log("handle login");
+    login({ email, password });
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
@@ -56,7 +66,18 @@ export default function Login() {
   );
 }
 
+const mapStateToProps = (state: AppState) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);
+
 interface FormData {
   email: string;
   password: string;
+}
+
+interface LoginProps {
+  login: (loginParams: LoginParams) => void;
+  isAuthenticated: boolean;
 }

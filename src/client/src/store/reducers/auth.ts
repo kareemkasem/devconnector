@@ -4,8 +4,10 @@ import {
   SIGNUP_FAIL,
   USER_LOADED,
   AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
 } from "../actions/action.types";
-import { UserType } from "../types";
+import { UserType } from "../../global.types";
 
 const initialState: authState = {
   token: localStorage.getItem("token"),
@@ -19,14 +21,14 @@ const authReducer = (state: authState = initialState, action: AppActionTypes) =>
     case USER_LOADED:
       return {
         ...state,
-        isAuthenticated: false,
+        isAuthenticated: true,
         loading: false,
         user: action.payload,
       } as authState;
 
     case SIGNUP_SUCCESS:
+    case LOGIN_SUCCESS:
       const token = action.payload.token;
-      console.log(token);
       localStorage.setItem("token", token);
       return {
         ...state,
@@ -35,6 +37,7 @@ const authReducer = (state: authState = initialState, action: AppActionTypes) =>
       } as authState;
 
     case SIGNUP_FAIL:
+    case LOGIN_FAIL:
     case AUTH_ERROR:
       localStorage.removeItem("token");
       return {

@@ -1,10 +1,12 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../store/actions/alerts";
 import { signup } from "../store/actions/auth";
+import { SignupParams } from "../global.types";
+import { AppState } from "../store/configureStore";
 
-function Signup({ setAlert, signup }: SignupProps) {
+function Signup({ setAlert, signup, isAuthenticated }: SignupProps) {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -28,6 +30,10 @@ function Signup({ setAlert, signup }: SignupProps) {
       signup({ name, email, password: password1 });
     }
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
@@ -90,11 +96,16 @@ function Signup({ setAlert, signup }: SignupProps) {
   );
 }
 
-export default connect(null, { setAlert, signup })(Signup);
+const mapStateToProps = (state: AppState) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, signup })(Signup);
 
 interface SignupProps {
   setAlert: typeof setAlert;
-  signup: any;
+  signup: (signupParams: SignupParams) => void;
+  isAuthenticated: boolean;
 }
 
 interface FormData {

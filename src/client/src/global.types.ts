@@ -18,3 +18,12 @@ export interface ServerError {
   param?: string;
   location?: string;
 }
+
+export interface LoginParams {
+  email: string;
+  password: string;
+}
+
+export interface SignupParams extends LoginParams {
+  name: string;
+}

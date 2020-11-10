@@ -1,5 +1,4 @@
 import { Dispatch } from "redux";
-import { v4 as uuid } from "uuid";
 import { AxiosResponse } from "axios";
 
 import AxiosRequest from "../../axios.config";
@@ -7,9 +6,12 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
   SetAlertType,
-  SET_ALERT,
   USER_LOADED,
   AUTH_ERROR,
+  LoginFailType,
+  LoginSuccessType,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
 } from "./action.types";
 import {
   SignupFailType,
@@ -17,27 +19,41 @@ import {
   UserLoadedType,
   AuthErrorType,
 } from "./action.types";
-import { ServerError, UserType } from "../types";
-import store from "../configureStore";
+import { LoginParams, SignupParams, UserType } from "../../global.types";
+import alertErrors from "../../utils/redux-alert-errors";
 
-export const loadUser = () => async (dispatch: Dispatch<any>) => {
+export const loadUser = () => async (
+  dispatch: Dispatch<UserLoadedType | AuthErrorType>
+) => {
   const token: string | null = localStorage.getItem("token");
   if (!token) return;
   try {
-    const response = await AxiosRequest.get<null, AxiosResponse<UserType>>("/api/auth", {
-      headers: {
-        "x-auth-token": localStorage.getItem("token"),
-      },
-    });
+    let user: UserType;
+    const userCookieExists = document.cookie.substr(0, 4);
+    if (userCookieExists) {
+      user = JSON.parse(document.cookie.substr(5));
+    } else {
+      const response = await AxiosRequest.get<null, AxiosResponse<UserType>>(
+        "/api/auth",
+        {
+          headers: {
+            "x-auth-token": localStorage.getItem("token"),
+          },
+        }
+      );
+      user = response.data;
+      document.cookie = `user=${JSON.stringify(user)}; max-age=${60 * 5}`;
+    }
+
     dispatch({
       type: USER_LOADED,
-      payload: response.data,
+      payload: user,
     } as UserLoadedType);
   } catch (error) {
+    console.log(error);
     dispatch({
       type: AUTH_ERROR,
     } as AuthErrorType);
-    console.log(error.response);
   }
 };
 
@@ -57,20 +73,10 @@ export const signup = ({ name, email, password }: SignupParams) => async (
       payload: response.data,
     } as SignupSuccessType);
 
-    store.dispatch(loadUser());
+    // @ts-ignore
+    dispatch(loadUser());
   } catch (error) {
-    const errorResponse: { errors: ServerError[] } = error?.response?.data;
-
-    errorResponse?.errors?.forEach((err: ServerError) => {
-      dispatch({
-        type: SET_ALERT,
-        payload: {
-          id: uuid(),
-          alertType: "danger",
-          msg: err.msg,
-        },
-      });
-    });
+    alertErrors(error, dispatch);
 
     dispatch({
       type: SIGNUP_FAIL,
@@ -78,8 +84,29 @@ export const signup = ({ name, email, password }: SignupParams) => async (
   }
 };
 
-interface SignupParams {
-  name: string;
-  email: string;
-  password: string;
-}
+export const login = ({ email, password }: LoginParams) => async (
+  dispatch: Dispatch<LoginSuccessType | LoginFailType | SetAlertType | UserLoadedType>
+) => {
+  const data = { email, password };
+
+  try {
+    const response = await AxiosRequest.post<
+      SignupParams,
+      AxiosResponse<{ token: string }>
+    >("/api/auth/login", data);
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: response.data,
+    } as LoginSuccessType);
+
+    // @ts-ignore
+    dispatch(loadUser());
+  } catch (error) {
+    alertErrors(error, dispatch);
+
+    dispatch({
+      type: LOGIN_FAIL,
+    } as LoginFailType);
+  }
+};

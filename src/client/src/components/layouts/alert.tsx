@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { removeAlert } from "../../store/actions/alerts";
 import { AppState } from "../../store/configureStore";
-import { AlertType } from "../../store/types";
+import { AlertType } from "../../global.types";
 
 function Alert({ alerts, removeAlert }: AlertProps) {
   return (

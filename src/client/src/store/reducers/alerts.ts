@@ -1,5 +1,5 @@
 import { AppActionTypes, REMOVE_ALERT, SET_ALERT } from "../actions/action.types";
-import { AlertType } from "../types";
+import { AlertType } from "../../global.types";
 
 const initialState: AlertType[] = [];
 
