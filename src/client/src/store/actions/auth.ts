@@ -10,18 +10,6 @@ export const signup = ({ name, email, password }: SignupParams) => async (
 ) => {
   const data = { name, email, password };
 
-  // @ts-ignore
-  // import superagent from "superagent";
-  // superagent
-  //   .post(process.env.REACT_APP_BASEURL + "/api/auth/signup")
-  //   .send(data)
-  //   .set("Content-Type", "application/json")
-  //   .end((err: any, res: any) => {
-  //     console.log(JSON.parse(res.text));
-  //   });
-
-  /* Superagent returns the actual server object unlike Axios that just send only a javascript error*/
-
   const config: AxiosRequestConfig = {
     headers: {
       "Content-Type": "application/json",
@@ -44,8 +32,8 @@ export const signup = ({ name, email, password }: SignupParams) => async (
       payload: result.data,
     });
   } catch (error) {
-    console.log(error.errors);
-    error.response.errors?.forEach((err: ServerError) => {
+    const errorResponse: { errors: ServerError[] } | undefined = error.response.data;
+    errorResponse?.errors.forEach((err: ServerError) => {
       dispatch({
         type: SET_ALERT,
         payload: {
