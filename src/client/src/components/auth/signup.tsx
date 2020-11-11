@@ -1,9 +1,9 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Link, RouteChildrenProps } from "react-router-dom";
 import { connect } from "react-redux";
-import { setAlert } from "../store/actions/alerts";
-import { signup } from "../store/actions/auth";
-import { SignupParams } from "../global.types";
+import { setAlert } from "../../store/actions/alerts";
+import { signup } from "../../store/actions/auth";
+import { SignupParams } from "../../global.types";
 
 function Signup({ setAlert, signup, history }: SignupProps) {
   const [formData, setFormData] = useState<FormData>({

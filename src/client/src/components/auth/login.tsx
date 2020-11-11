@@ -2,8 +2,8 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Link, RouteChildrenProps } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { login } from "../store/actions/auth";
-import { LoginParams } from "../global.types";
+import { login } from "../../store/actions/auth";
+import { LoginParams } from "../../global.types";
 
 function Login({ login, history }: LoginProps) {
   const [formData, setFormData] = useState<FormData>({

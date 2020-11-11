@@ -8,10 +8,11 @@ import store, { AppState } from "./store/configureStore";
 import Navbar from "./components/layouts/navbar";
 import Landing from "./components/layouts/landing";
 import Alert from "./components/layouts/alert";
-import Login from "./components/login";
-import Signup from "./components/signup";
+import Login from "./components/auth/login";
+import Signup from "./components/auth/signup";
 import Profiles from "./components/profiles";
 import { connect } from "react-redux";
+import DashBoard from "./components/dashboard/dashboard";
 
 const App = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   useEffect(() => {
@@ -20,11 +21,10 @@ const App = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
 
   const protectRoute = (
     component: JSX.Element,
-    val: boolean = false,
-    redirectTo: string = "/dashboard"
-  ) => {
-    if (isAuthenticated === val) return component;
-    return <Redirect to={redirectTo} />;
+    returnComponentWhenAuth: boolean = true
+  ): JSX.Element => {
+    if (isAuthenticated === returnComponentWhenAuth) return component;
+    return <Redirect to={returnComponentWhenAuth ? "/" : "/dashboard"} />;
   };
 
   return (
@@ -34,7 +34,7 @@ const App = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
         <Navbar />
       }
       <Switch>
-        <Route path="/" exact render={() => protectRoute(<Landing />)} />
+        <Route path="/" exact render={() => protectRoute(<Landing />, false)} />
         <>
           {/* use <> inside Switch not anything else */}
           <section className="container">
@@ -42,18 +42,22 @@ const App = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
             <Route
               path="/signup"
               exact
-              render={routeProps => protectRoute(<Signup {...routeProps} />)}
+              render={routeProps =>
+                protectRoute(<Signup {...routeProps} />, false)
+              }
             />
             <Route
               path="/login"
               exact
-              render={routeProps => protectRoute(<Login {...routeProps} />)}
+              render={routeProps =>
+                protectRoute(<Login {...routeProps} />, false)
+              }
             />
             <Route path="/profiles" exact component={Profiles} />
             <Route
               path="/dashboard"
               exact
-              render={() => protectRoute(<h1>test</h1>, true, "/")}
+              render={() => protectRoute(<DashBoard />)}
             />
           </section>
         </>
