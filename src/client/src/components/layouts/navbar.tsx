@@ -1,7 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { AppState } from "../../store/configureStore";
+import { logout } from "../../store/actions/auth";
 
-export default function Navbar() {
+function Navbar({ logout, isAuthenticated }: NavbarProps) {
   return (
     <nav className="navbar bg-dark">
       <h1>
@@ -13,13 +16,32 @@ export default function Navbar() {
         <li>
           <Link to="/profiles">Developers</Link>
         </li>
-        <li>
-          <Link to="/signup">Sign Up</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
+        {!isAuthenticated ? (
+          <>
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </>
+        ) : (
+          <li onClick={logout} className="a">
+            logout
+          </li>
+        )}
       </ul>
     </nav>
   );
+}
+
+const mapStateToProps = (state: AppState) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);
+
+interface NavbarProps {
+  isAuthenticated: boolean;
+  logout: VoidFunction;
 }

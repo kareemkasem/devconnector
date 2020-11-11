@@ -1,12 +1,11 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, RouteChildrenProps } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { login } from "../store/actions/auth";
 import { LoginParams } from "../global.types";
-import { AppState } from "../store/configureStore";
 
-function Login({ isAuthenticated, login }: LoginProps) {
+function Login({ login, history }: LoginProps) {
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -23,11 +22,8 @@ function Login({ isAuthenticated, login }: LoginProps) {
     const { email, password } = formData;
     e.preventDefault();
     login({ email, password });
+    history.push("/dashboard");
   };
-
-  if (isAuthenticated) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <>
@@ -66,18 +62,13 @@ function Login({ isAuthenticated, login }: LoginProps) {
   );
 }
 
-const mapStateToProps = (state: AppState) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default connect(null, { login })(Login);
 
 interface FormData {
   email: string;
   password: string;
 }
 
-interface LoginProps {
+interface LoginProps extends RouteChildrenProps {
   login: (loginParams: LoginParams) => void;
-  isAuthenticated: boolean;
 }

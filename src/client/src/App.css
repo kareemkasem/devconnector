@@ -27,6 +27,11 @@ a {
   text-decoration: none;
 }
 
+.a:hover {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
 ul {
   list-style: none;
 }

@@ -12,6 +12,8 @@ import {
   LoginSuccessType,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
+  LogoutType,
+  LOGOUT,
 } from "./action.types";
 import {
   SignupFailType,
@@ -109,4 +111,12 @@ export const login = ({ email, password }: LoginParams) => async (
       type: LOGIN_FAIL,
     } as LoginFailType);
   }
+};
+
+export const logout = () => {
+  localStorage.removeItem("token");
+  document.cookie = "";
+  return {
+    type: LOGOUT,
+  } as LogoutType;
 };

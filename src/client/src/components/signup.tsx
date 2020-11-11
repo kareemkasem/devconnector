@@ -1,12 +1,11 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, RouteChildrenProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../store/actions/alerts";
 import { signup } from "../store/actions/auth";
 import { SignupParams } from "../global.types";
-import { AppState } from "../store/configureStore";
 
-function Signup({ setAlert, signup, isAuthenticated }: SignupProps) {
+function Signup({ setAlert, signup, history }: SignupProps) {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -28,12 +27,9 @@ function Signup({ setAlert, signup, isAuthenticated }: SignupProps) {
     } else {
       const { name, email, password1 } = formData;
       signup({ name, email, password: password1 });
+      history.push("/dashboard");
     }
   };
-
-  if (isAuthenticated) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <>
@@ -96,16 +92,11 @@ function Signup({ setAlert, signup, isAuthenticated }: SignupProps) {
   );
 }
 
-const mapStateToProps = (state: AppState) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
+export default connect(null, { setAlert, signup })(Signup);
 
-export default connect(mapStateToProps, { setAlert, signup })(Signup);
-
-interface SignupProps {
+interface SignupProps extends RouteChildrenProps {
   setAlert: typeof setAlert;
   signup: (signupParams: SignupParams) => void;
-  isAuthenticated: boolean;
 }
 
 interface FormData {

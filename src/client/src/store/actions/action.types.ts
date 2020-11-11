@@ -8,6 +8,7 @@ export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT = "LOGOUT";
 
 export interface SetAlertType {
   type: typeof SET_ALERT;
@@ -44,6 +45,9 @@ export interface LoginSuccessType {
 export interface LoginFailType {
   type: typeof LOGIN_FAIL;
 }
+export interface LogoutType {
+  type: typeof LOGOUT;
+}
 
 export type AppActionTypes =
   | SetAlertType
@@ -53,4 +57,5 @@ export type AppActionTypes =
   | UserLoadedType
   | AuthErrorType
   | LoginSuccessType
-  | LoginFailType;
+  | LoginFailType
+  | LogoutType;

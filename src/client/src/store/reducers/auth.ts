@@ -6,6 +6,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGOUT,
 } from "../actions/action.types";
 import { UserType } from "../../global.types";
 
@@ -39,6 +40,7 @@ const authReducer = (state: authState = initialState, action: AppActionTypes) =>
     case SIGNUP_FAIL:
     case LOGIN_FAIL:
     case AUTH_ERROR:
+    case LOGOUT:
       localStorage.removeItem("token");
       return {
         user: null,
@@ -46,7 +48,6 @@ const authReducer = (state: authState = initialState, action: AppActionTypes) =>
         loading: false,
         isAuthenticated: false,
       } as authState;
-
     default:
       return state;
   }
