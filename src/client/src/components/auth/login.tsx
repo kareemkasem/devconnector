@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link, RouteChildrenProps } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { login } from "../../store/actions/auth";
 import { LoginParams } from "../../global.types";
 
-function Login({ login, history }: LoginProps) {
+function Login({ login }: LoginProps) {
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -22,7 +22,6 @@ function Login({ login, history }: LoginProps) {
     const { email, password } = formData;
     e.preventDefault();
     login({ email, password });
-    history.push("/dashboard");
   };
 
   return (
@@ -69,6 +68,6 @@ interface FormData {
   password: string;
 }
 
-interface LoginProps extends RouteChildrenProps {
+interface LoginProps {
   login: (loginParams: LoginParams) => void;
 }

@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
 import { AxiosResponse } from "axios";
+// import { push, RouterAction } from "react-router-redux";
 
 import AxiosRequest from "../../axios.config";
 import {
@@ -23,9 +24,12 @@ import {
 } from "./action.types";
 import { LoginParams, SignupParams, UserType } from "../../global.types";
 import alertErrors from "../../utils/redux-alert-errors";
+import { CallHistoryMethodAction, push } from "connected-react-router";
 
 export const loadUser = () => async (
-  dispatch: Dispatch<UserLoadedType | AuthErrorType>
+  dispatch: Dispatch<
+    UserLoadedType | AuthErrorType | CallHistoryMethodAction<any>
+  >
 ) => {
   const token: string | null = localStorage.getItem("token");
   if (!token) return;
@@ -51,6 +55,8 @@ export const loadUser = () => async (
       type: USER_LOADED,
       payload: user,
     } as UserLoadedType);
+
+    dispatch(push("/dashboard"));
   } catch (error) {
     console.log(error);
     dispatch({
@@ -87,7 +93,9 @@ export const signup = ({ name, email, password }: SignupParams) => async (
 };
 
 export const login = ({ email, password }: LoginParams) => async (
-  dispatch: Dispatch<LoginSuccessType | LoginFailType | SetAlertType | UserLoadedType>
+  dispatch: Dispatch<
+    LoginSuccessType | LoginFailType | SetAlertType | UserLoadedType
+  >
 ) => {
   const data = { email, password };
 

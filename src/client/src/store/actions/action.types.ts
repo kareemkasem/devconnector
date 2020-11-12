@@ -1,3 +1,4 @@
+import { CallHistoryMethodAction } from "connected-react-router";
 import { AlertType, UserType } from "../../global.types";
 
 export const SET_ALERT = "SET_ALERT";
@@ -50,6 +51,7 @@ export interface LogoutType {
 }
 
 export type AppActionTypes =
+  | CallHistoryMethodAction //for router bindings
   | SetAlertType
   | RemoveAlertType
   | SignupSuccessType

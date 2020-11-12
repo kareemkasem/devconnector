@@ -42,16 +42,12 @@ const App = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
             <Route
               path="/signup"
               exact
-              render={routeProps =>
-                protectRoute(<Signup {...routeProps} />, false)
-              }
+              render={() => protectRoute(<Signup />, false)}
             />
             <Route
               path="/login"
               exact
-              render={routeProps =>
-                protectRoute(<Login {...routeProps} />, false)
-              }
+              render={() => protectRoute(<Login />, false)}
             />
             <Route path="/profiles" exact component={Profiles} />
             <Route

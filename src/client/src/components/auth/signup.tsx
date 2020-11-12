@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link, RouteChildrenProps } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../store/actions/alerts";
 import { signup } from "../../store/actions/auth";
 import { SignupParams } from "../../global.types";
 
-function Signup({ setAlert, signup, history }: SignupProps) {
+function Signup({ setAlert, signup }: SignupProps) {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -27,7 +27,6 @@ function Signup({ setAlert, signup, history }: SignupProps) {
     } else {
       const { name, email, password1 } = formData;
       signup({ name, email, password: password1 });
-      history.push("/dashboard");
     }
   };
 
@@ -43,7 +42,7 @@ function Signup({ setAlert, signup, history }: SignupProps) {
             type="text"
             placeholder="Name"
             name="name"
-            // required
+            required
             onChange={onChange}
             value={formData.name}
           />
@@ -52,13 +51,14 @@ function Signup({ setAlert, signup, history }: SignupProps) {
           <input
             type="email"
             placeholder="Email Address"
-            // required
+            required
             name="email"
             onChange={onChange}
             value={formData.email}
           />
           <small className="form-text">
-            This site uses Gravatar so if you want a profile image, use a Gravatar email
+            This site uses Gravatar so if you want a profile image, use a
+            Gravatar email
           </small>
         </div>
         <div className="form-group">
@@ -66,7 +66,7 @@ function Signup({ setAlert, signup, history }: SignupProps) {
             type="password"
             placeholder="Password"
             name="password1"
-            // minLength={6}
+            minLength={6}
             onChange={onChange}
             value={formData.password1}
           />
@@ -76,7 +76,7 @@ function Signup({ setAlert, signup, history }: SignupProps) {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            // minLength={6}
+            minLength={6}
             onChange={onChange}
             value={formData.password2}
           />
@@ -94,7 +94,7 @@ function Signup({ setAlert, signup, history }: SignupProps) {
 
 export default connect(null, { setAlert, signup })(Signup);
 
-interface SignupProps extends RouteChildrenProps {
+interface SignupProps {
   setAlert: typeof setAlert;
   signup: (signupParams: SignupParams) => void;
 }
