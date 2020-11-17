@@ -1,5 +1,5 @@
 import { CallHistoryMethodAction } from "connected-react-router";
-import { AlertType, UserType } from "../../global.types";
+import { AlertType, ProfileType, UserType } from "../../global.types";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
@@ -10,6 +10,8 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
+export const GET_PROFILE = "GET_PROFILE";
+export const PROFILE_ERROR = "PROFILE_ERROR";
 
 export interface SetAlertType {
   type: typeof SET_ALERT;
@@ -49,6 +51,14 @@ export interface LoginFailType {
 export interface LogoutType {
   type: typeof LOGOUT;
 }
+export interface GetProfile {
+  type: typeof GET_PROFILE;
+  payload: ProfileType;
+}
+export interface ProfileError {
+  type: typeof PROFILE_ERROR;
+  payload: { status: string; statusText: string };
+}
 
 export type AppActionTypes =
   | CallHistoryMethodAction //for router bindings
@@ -60,4 +70,6 @@ export type AppActionTypes =
   | AuthErrorType
   | LoginSuccessType
   | LoginFailType
-  | LogoutType;
+  | LogoutType
+  | GetProfile
+  | ProfileError;

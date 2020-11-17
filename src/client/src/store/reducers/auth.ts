@@ -10,14 +10,17 @@ import {
 } from "../actions/action.types";
 import { UserType } from "../../global.types";
 
-const initialState: authState = {
+const initialState: AuthState = {
   token: localStorage.getItem("token"),
   isAuthenticated: false,
   user: null,
   loading: false,
 };
 
-const authReducer = (state: authState = initialState, action: AppActionTypes) => {
+const authReducer = (
+  state: AuthState = initialState,
+  action: AppActionTypes
+) => {
   switch (action.type) {
     case USER_LOADED:
       return {
@@ -25,7 +28,7 @@ const authReducer = (state: authState = initialState, action: AppActionTypes) =>
         isAuthenticated: true,
         loading: false,
         user: action.payload,
-      } as authState;
+      } as AuthState;
 
     case SIGNUP_SUCCESS:
     case LOGIN_SUCCESS:
@@ -35,7 +38,7 @@ const authReducer = (state: authState = initialState, action: AppActionTypes) =>
         ...state,
         token,
         loading: false,
-      } as authState;
+      } as AuthState;
 
     case SIGNUP_FAIL:
     case LOGIN_FAIL:
@@ -47,7 +50,7 @@ const authReducer = (state: authState = initialState, action: AppActionTypes) =>
         token: null,
         loading: false,
         isAuthenticated: false,
-      } as authState;
+      } as AuthState;
     default:
       return state;
   }
@@ -55,7 +58,7 @@ const authReducer = (state: authState = initialState, action: AppActionTypes) =>
 
 export default authReducer;
 
-interface authState {
+export interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
   user: UserType | null;
