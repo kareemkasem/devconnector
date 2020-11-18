@@ -4,10 +4,38 @@ import { getCurrentUserProfile } from "../../store/actions/profile";
 import { AppState } from "../../store/configureStore";
 import { AuthState } from "../../store/reducers/auth";
 import { ProfileState } from "../../store/reducers/profile";
+import { BounceLoader } from "react-spinners";
+import { Link } from "react-router-dom";
 
-function DashBoard(props: DashBoardProps) {
-  useEffect(() => props.getCurrentUserProfile(), []);
-  return <h1>testing</h1>;
+function DashBoard({ getCurrentUserProfile, auth, profile }: DashBoardProps) {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => getCurrentUserProfile(), []);
+
+  const { user } = auth;
+  const { loading } = profile;
+
+  if (loading) {
+    return <BounceLoader loading={loading} />;
+  } else {
+    return (
+      <div>
+        <h1 className="large text-primary">Dashboard</h1>
+        <p className="lead">
+          <i className="fas fa-user" /> Welcome {user && user.name}
+        </p>
+        {!profile ? (
+          <>has</>
+        ) : (
+          <>
+            <p>no profile info found.</p>
+            <Link to="/create-profile" className="btn btn-primary my-1">
+              Get Started
+            </Link>
+          </>
+        )}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state: AppState) => ({

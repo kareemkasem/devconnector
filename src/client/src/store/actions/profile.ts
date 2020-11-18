@@ -1,12 +1,12 @@
 import AxiosConfig from "../../axios.config";
 import { GET_PROFILE, PROFILE_ERROR } from "./action.types";
-import { GetProfile, ProfileError } from "./action.types";
+import { GetProfileType, ProfileErrorType } from "./action.types";
 import { Dispatch } from "redux";
 import { ProfileType } from "../../global.types";
 import { AxiosResponse } from "axios";
 
 export const getCurrentUserProfile = () => async (
-  dispatch: Dispatch<GetProfile | ProfileError>
+  dispatch: Dispatch<GetProfileType | ProfileErrorType>
 ) => {
   try {
     const axiosRequest = new AxiosConfig().instance;
@@ -16,7 +16,7 @@ export const getCurrentUserProfile = () => async (
     dispatch({
       type: GET_PROFILE,
       payload: response.data,
-    } as GetProfile);
+    } as GetProfileType);
   } catch (error) {
     dispatch({
       type: PROFILE_ERROR,
@@ -24,6 +24,6 @@ export const getCurrentUserProfile = () => async (
         status: error.response.status,
         statusText: error.response.statusText,
       },
-    } as ProfileError);
+    } as ProfileErrorType);
   }
 };

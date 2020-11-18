@@ -12,6 +12,8 @@ import {
   LOGIN_SUCCESS,
   LogoutType,
   LOGOUT,
+  ClearProfileType,
+  CLEAR_PROFILE,
 } from "./action.types";
 import {
   SignupFailType,
@@ -120,10 +122,15 @@ export const login = ({ email, password }: LoginParams) => async (
   }
 };
 
-export const logout = () => {
+export const logout = () => (
+  dispatch: Dispatch<LogoutType | ClearProfileType>
+) => {
   localStorage.removeItem("token");
   document.cookie = "";
-  return {
+  dispatch({
+    type: CLEAR_PROFILE,
+  } as ClearProfileType);
+  dispatch({
     type: LOGOUT,
-  } as LogoutType;
+  } as LogoutType);
 };

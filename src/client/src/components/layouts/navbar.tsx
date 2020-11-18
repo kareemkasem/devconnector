@@ -13,11 +13,15 @@ function Navbar({ logout, isAuthenticated }: NavbarProps) {
         </Link>
       </h1>
       <ul>
-        <li>
-          <Link to="/profiles">Developers</Link>
-        </li>
         {!isAuthenticated ? (
           <>
+            <li>
+              <i
+                className="fas fa-sitemap"
+                style={{ marginLeft: "8px", marginRight: "-4px" }}
+              />
+              <Link to="/profiles">Developers</Link>
+            </li>
             <li>
               <Link to="/signup">Sign Up</Link>
             </li>
@@ -26,9 +30,22 @@ function Navbar({ logout, isAuthenticated }: NavbarProps) {
             </li>
           </>
         ) : (
-          <li onClick={logout} className="a">
-            logout
-          </li>
+          <>
+            <li>
+              <i
+                className="fas fa-columns"
+                style={{ marginLeft: "8px", marginRight: "-4px" }}
+              />
+              <Link to="/dashboard">DashBoard</Link>
+            </li>
+            <li onClick={logout} className="a">
+              <i
+                className="fas fa-sign-out-alt"
+                style={{ marginLeft: "8px", marginRight: "4px" }}
+              />
+              Logout
+            </li>
+          </>
         )}
       </ul>
     </nav>

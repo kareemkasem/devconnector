@@ -1,6 +1,7 @@
 import { ProfileType } from "../../global.types";
 import {
   AppActionTypes,
+  CLEAR_PROFILE,
   GET_PROFILE,
   PROFILE_ERROR,
 } from "../actions/action.types";
@@ -10,26 +11,35 @@ const initialState: ProfileState = {
   profiles: [],
   repos: [],
   error: {},
-  loading: false,
+  loading: true,
 };
 
 const profileReducer = (
   state: ProfileState = initialState,
   action: AppActionTypes
-) => {
+): ProfileState => {
   switch (action.type) {
     case GET_PROFILE:
       return {
         ...state,
         profile: action.payload,
         loading: false,
-      } as ProfileState;
+      };
+
     case PROFILE_ERROR:
       return {
         ...state,
         error: action.payload,
         loading: false,
-      } as ProfileState;
+      };
+
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: null,
+        loading: false,
+      };
+
     default:
       return state;
   }

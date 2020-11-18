@@ -12,6 +12,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 export const GET_PROFILE = "GET_PROFILE";
 export const PROFILE_ERROR = "PROFILE_ERROR";
+export const CLEAR_PROFILE = "CLEAR_PROFILE";
 
 export interface SetAlertType {
   type: typeof SET_ALERT;
@@ -51,13 +52,16 @@ export interface LoginFailType {
 export interface LogoutType {
   type: typeof LOGOUT;
 }
-export interface GetProfile {
+export interface GetProfileType {
   type: typeof GET_PROFILE;
   payload: ProfileType;
 }
-export interface ProfileError {
+export interface ProfileErrorType {
   type: typeof PROFILE_ERROR;
   payload: { status: string; statusText: string };
+}
+export interface ClearProfileType {
+  type: typeof CLEAR_PROFILE;
 }
 
 export type AppActionTypes =
@@ -71,5 +75,6 @@ export type AppActionTypes =
   | LoginSuccessType
   | LoginFailType
   | LogoutType
-  | GetProfile
-  | ProfileError;
+  | GetProfileType
+  | ProfileErrorType
+  | ClearProfileType;

@@ -14,13 +14,13 @@ const initialState: AuthState = {
   token: localStorage.getItem("token"),
   isAuthenticated: false,
   user: null,
-  loading: false,
+  loading: true,
 };
 
 const authReducer = (
   state: AuthState = initialState,
   action: AppActionTypes
-) => {
+): AuthState => {
   switch (action.type) {
     case USER_LOADED:
       return {
@@ -28,7 +28,7 @@ const authReducer = (
         isAuthenticated: true,
         loading: false,
         user: action.payload,
-      } as AuthState;
+      };
 
     case SIGNUP_SUCCESS:
     case LOGIN_SUCCESS:
@@ -38,7 +38,7 @@ const authReducer = (
         ...state,
         token,
         loading: false,
-      } as AuthState;
+      };
 
     case SIGNUP_FAIL:
     case LOGIN_FAIL:
@@ -50,7 +50,7 @@ const authReducer = (
         token: null,
         loading: false,
         isAuthenticated: false,
-      } as AuthState;
+      };
     default:
       return state;
   }
