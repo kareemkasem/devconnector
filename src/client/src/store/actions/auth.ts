@@ -54,8 +54,6 @@ export const loadUser = () => async (
       type: USER_LOADED,
       payload: user,
     } as UserLoadedType);
-
-    dispatch(push("/dashboard"));
   } catch (error) {
     console.log(error);
     dispatch({

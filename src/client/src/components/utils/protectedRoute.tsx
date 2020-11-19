@@ -5,30 +5,38 @@ import { AppState } from "../../store/configureStore";
 
 function ProtectedRoute({
   isAuthenticated,
-  componentIfAuth,
+  loading,
+  componentIfAuth = true,
   element,
   ...rest
 }: ProtectedRouteProps) {
-  if (componentIfAuth === undefined) componentIfAuth = true;
-  return (
-    <Route
-      {...rest}
-      render={() => {
-        if (isAuthenticated === componentIfAuth) return element;
-        return <Redirect to={componentIfAuth ? "/" : "/dashboard"} />;
-      }}
-    />
-  );
+  if (loading) {
+    return <></>;
+  } else {
+    return (
+      <Route
+        {...rest}
+        render={() => {
+          if (isAuthenticated === componentIfAuth) return element;
+          return <Redirect to={componentIfAuth ? "/" : "/dashboard"} />;
+        }}
+      />
+    );
+  }
 }
 
 const mapStateToProps = (state: AppState) => {
-  return { isAuthenticated: state.auth.isAuthenticated };
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading,
+  };
 };
 
 export default connect(mapStateToProps)(ProtectedRoute);
 
 interface ProtectedRouteProps extends RouteProps {
-  isAuthenticated?: boolean;
+  isAuthenticated: boolean;
   componentIfAuth?: boolean;
+  loading: boolean;
   element: JSX.Element;
 }
