@@ -1,18 +1,18 @@
-import AxiosConfig from "../../axios.config";
+import axiosInstance from "../../axios.config";
 import { GET_PROFILE, PROFILE_ERROR } from "./action.types";
 import { GetProfileType, ProfileErrorType } from "./action.types";
 import { Dispatch } from "redux";
-import { ProfileType } from "../../global.types";
+import { BasicProfileType, ProfileType } from "../../global.types";
 import { AxiosResponse } from "axios";
 
 export const getCurrentUserProfile = () => async (
   dispatch: Dispatch<GetProfileType | ProfileErrorType>
 ) => {
   try {
-    const axiosRequest = new AxiosConfig().instance;
-    const response = await axiosRequest.get<null, AxiosResponse<ProfileType>>(
-      "/api/profile/me"
-    );
+    const response = await axiosInstance().get<
+      null,
+      AxiosResponse<ProfileType>
+    >("/api/profile/me");
     dispatch({
       type: GET_PROFILE,
       payload: response.data,
@@ -26,4 +26,11 @@ export const getCurrentUserProfile = () => async (
       },
     } as ProfileErrorType);
   }
+};
+
+export const createOrUpdateProfile = (
+  formData: BasicProfileType,
+  edit: boolean = false
+) => async (dispatch: Dispatch<any>) => {
+  const res = await axiosInstance().post("/api/profile", formData);
 };

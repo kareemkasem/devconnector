@@ -1,5 +1,5 @@
 import Axios, { AxiosInstance } from "axios";
-export default class AxiosConfig {
+export class AxiosConfig {
   constructor() {
     this.configureDefaults();
   }
@@ -16,3 +16,8 @@ export default class AxiosConfig {
       this.instance.defaults.headers.common["x-auth-token"] = this.token;
   }
 }
+
+const axiosInstance = () => {
+  return new AxiosConfig().instance;
+};
+export default axiosInstance;

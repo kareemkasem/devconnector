@@ -23,11 +23,11 @@ import {
 } from "./action.types";
 import { LoginParams, SignupParams, UserType } from "../../global.types";
 import alertErrors from "../../utils/redux-alert-errors";
-import { CallHistoryMethodAction, push } from "connected-react-router";
 import AxiosConfig from "../../axios.config";
+import axiosInstance from "../../axios.config";
 
 export const loadUser = () => async (
-  dispatch: Dispatch<UserLoadedType | AuthErrorType | CallHistoryMethodAction>
+  dispatch: Dispatch<UserLoadedType | AuthErrorType>
 ) => {
   const token: string | null = localStorage.getItem("token");
   if (!token) return;
@@ -37,8 +37,7 @@ export const loadUser = () => async (
     if (userCookieExists) {
       user = JSON.parse(document.cookie.substr(5));
     } else {
-      const axiosRequest = new AxiosConfig().instance;
-      const response = await axiosRequest.get<null, AxiosResponse<UserType>>(
+      const response = await axiosInstance().get<null, AxiosResponse<UserType>>(
         "/api/auth",
         {
           headers: {
@@ -68,8 +67,7 @@ export const signup = ({ name, email, password }: SignupParams) => async (
   const data = { name, email, password };
 
   try {
-    const axiosRequest = new AxiosConfig().instance;
-    const response = await axiosRequest.post<
+    const response = await axiosInstance().post<
       SignupParams,
       AxiosResponse<{ token: string }>
     >("/api/auth/signup", data);
@@ -98,8 +96,7 @@ export const login = ({ email, password }: LoginParams) => async (
   const data = { email, password };
 
   try {
-    const axiosRequest = new AxiosConfig().instance;
-    const response = await axiosRequest.post<
+    const response = await axiosInstance().post<
       SignupParams,
       AxiosResponse<{ token: string }>
     >("/api/auth/login", data);
