@@ -4,7 +4,7 @@ import { getCurrentUserProfile } from "../../store/actions/profile";
 import { AppState } from "../../store/configureStore";
 import { AuthState } from "../../store/reducers/auth";
 import { ProfileState } from "../../store/reducers/profile";
-import { BounceLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 
 function DashBoard({ getCurrentUserProfile, auth, profile }: DashBoardProps) {
@@ -15,7 +15,11 @@ function DashBoard({ getCurrentUserProfile, auth, profile }: DashBoardProps) {
   const { loading } = profile;
 
   if (loading) {
-    return <BounceLoader loading={loading} />;
+    return (
+      <div className="loader-page">
+        <MoonLoader loading={true} size={100} color="#00A3B8" />;
+      </div>
+    );
   } else {
     return (
       <div>

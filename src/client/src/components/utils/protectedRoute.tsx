@@ -1,26 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, RouteProps } from "react-router-dom";
 import { AppState } from "../../store/configureStore";
 
 function ProtectedRoute({
   isAuthenticated,
   componentIfAuth,
-  path,
-  component,
+  element,
+  ...rest
 }: ProtectedRouteProps) {
-  const protectRoute = (
-    component: JSX.Element,
-    returnComponentWhenAuth: boolean = true
-  ): JSX.Element => {
-    if (isAuthenticated === returnComponentWhenAuth) return component;
-    return <Redirect to={returnComponentWhenAuth ? "/" : "/dashboard"} />;
-  };
+  if (componentIfAuth === undefined) componentIfAuth = true;
   return (
     <Route
-      path={path}
-      exact
-      render={() => protectRoute(component, componentIfAuth)}
+      {...rest}
+      render={() => {
+        if (isAuthenticated === componentIfAuth) return element;
+        return <Redirect to={componentIfAuth ? "/" : "/dashboard"} />;
+      }}
     />
   );
 }
@@ -31,9 +27,8 @@ const mapStateToProps = (state: AppState) => {
 
 export default connect(mapStateToProps)(ProtectedRoute);
 
-interface ProtectedRouteProps {
+interface ProtectedRouteProps extends RouteProps {
   isAuthenticated?: boolean;
   componentIfAuth?: boolean;
-  component: JSX.Element;
-  path: string;
+  element: JSX.Element;
 }
