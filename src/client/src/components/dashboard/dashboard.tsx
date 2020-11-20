@@ -8,8 +8,7 @@ import { MoonLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 
 function DashBoard({ getCurrentUserProfile, auth, profile }: DashBoardProps) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => getCurrentUserProfile(), []);
+  useEffect(() => getCurrentUserProfile(), [getCurrentUserProfile]);
 
   const { user } = auth;
   const { loading } = profile;

@@ -16,8 +16,9 @@ function CreateProfile({
   createOrUpdateProfile,
   getCurrentUserProfile,
 }: createProfileProps) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => getCurrentUserProfile(), []);
+  useEffect(() => {
+    getCurrentUserProfile();
+  }, [getCurrentUserProfile]);
 
   const [formData, setFormData] = useState<ProfileType>(
     profileData
@@ -35,6 +36,10 @@ function CreateProfile({
           experience: [],
         }
   );
+
+  useEffect(() => {
+    if (profileData) setFormData(profileData);
+  }, [profileData]);
 
   const { status, bio, company, githubusername, location, website } = formData;
 

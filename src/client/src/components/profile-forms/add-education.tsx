@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { EducationType } from "../../global.types";
 
 function AddEducation({ submitter }: AddEducationProps) {
