@@ -28,25 +28,11 @@ import axiosInstance from "../../axios.config";
 export const loadUser = () => async (
   dispatch: Dispatch<UserLoadedType | AuthErrorType>
 ) => {
-  const token: string | null = localStorage.getItem("token");
-  if (!token) return;
   try {
-    let user: UserType;
-    const userCookieExists = document.cookie.substr(0, 4);
-    if (userCookieExists) {
-      user = JSON.parse(document.cookie.substr(5));
-    } else {
-      const response = await axiosInstance().get<null, AxiosResponse<UserType>>(
-        "/api/auth",
-        {
-          headers: {
-            "x-auth-token": localStorage.getItem("token"),
-          },
-        }
-      );
-      user = response.data;
-      document.cookie = `user=${JSON.stringify(user)}; max-age=${60 * 5}`;
-    }
+    const response = await axiosInstance().get<null, AxiosResponse<UserType>>(
+      "/api/auth"
+    );
+    const user = response.data;
 
     dispatch({
       type: USER_LOADED,
@@ -120,7 +106,6 @@ export const logout = () => (
   dispatch: Dispatch<LogoutType | ClearProfileType>
 ) => {
   localStorage.removeItem("token");
-  document.cookie = "";
   dispatch({
     type: CLEAR_PROFILE,
   } as ClearProfileType);

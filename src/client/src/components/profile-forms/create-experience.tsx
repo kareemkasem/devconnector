@@ -1,6 +1,5 @@
 import moment from "moment";
-import React, { ChangeEvent, FormEvent, Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { ExperienceType } from "../../global.types";
 
 const AddExperience = ({ addExperience }: AddExperienceProps) => {

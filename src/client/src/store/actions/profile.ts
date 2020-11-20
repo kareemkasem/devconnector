@@ -2,7 +2,7 @@ import axiosInstance from "../../axios.config";
 import { GET_PROFILE, PROFILE_ERROR } from "./action.types";
 import { GetProfileType, ProfileErrorType } from "./action.types";
 import { Dispatch } from "redux";
-import { BasicProfileType, ProfileType } from "../../global.types";
+import { ProfileType } from "../../global.types";
 import { AxiosResponse } from "axios";
 
 export const getCurrentUserProfile = () => async (
@@ -29,8 +29,14 @@ export const getCurrentUserProfile = () => async (
 };
 
 export const createOrUpdateProfile = (
-  formData: BasicProfileType,
+  formData: ProfileType,
   edit: boolean = false
 ) => async (dispatch: Dispatch<any>) => {
   const res = await axiosInstance().post("/api/profile", formData);
+  /******************************************************************
+   * need to start working on this thing
+   ******************************************************************/
 };
+
+export const addExperience = () => {};
+export const addEducation = () => {};

@@ -1,6 +1,5 @@
 import moment from "moment";
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
 import { EducationType } from "../../global.types";
 
 function AddEducation({ addEducation }: AddEducationProps) {

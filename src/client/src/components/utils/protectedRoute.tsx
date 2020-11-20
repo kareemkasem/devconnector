@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, RouteProps } from "react-router-dom";
+import { MoonLoader } from "react-spinners";
 import { AppState } from "../../store/configureStore";
 
 function ProtectedRoute({
@@ -10,19 +11,24 @@ function ProtectedRoute({
   element,
   ...rest
 }: ProtectedRouteProps) {
-  if (loading) {
-    return <></>;
-  } else {
-    return (
-      <Route
-        {...rest}
-        render={() => {
-          if (isAuthenticated === componentIfAuth) return element;
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        if (loading) {
+          return (
+            <div className="loader-page">
+              <MoonLoader loading={true} size={100} color="#00A3B8" />;
+            </div>
+          );
+        } else if (isAuthenticated === componentIfAuth) {
+          return element;
+        } else {
           return <Redirect to={componentIfAuth ? "/" : "/dashboard"} />;
-        }}
-      />
-    );
-  }
+        }
+      }}
+    />
+  );
 }
 
 const mapStateToProps = (state: AppState) => {
