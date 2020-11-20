@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { ExperienceType } from "../../global.types";
 
-const AddExperience = ({ addExperience }: AddExperienceProps) => {
+const AddExperience = ({ submitter }: AddExperienceProps) => {
   const initialState: ExperienceType = {
     company: "",
     jobTitle: "",
@@ -36,19 +36,26 @@ const AddExperience = ({ addExperience }: AddExperienceProps) => {
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   };
 
-  const onSubmit = (e: FormEvent) => {
+  const addExperience = (
+    data: ExperienceType,
+    dataSubmitter: (data: ExperienceType) => void
+  ) => {
+    dataSubmitter(data);
+  };
+
+  const submit = (e: FormEvent) => {
     e.preventDefault();
-    addExperience(formData);
+    addExperience(formData, submitter);
     setFormData(initialState);
   };
 
   return (
-    <form className="form" onSubmit={onSubmit}>
+    <div className="form">
       <div className="form-group">
         <input
           type="text"
           placeholder="* Job Title"
-          name="title"
+          name="jobTitle"
           value={jobTitle}
           onChange={onChange}
           required
@@ -115,13 +122,15 @@ const AddExperience = ({ addExperience }: AddExperienceProps) => {
           onChange={onChange}
         />
       </div>
-      <input type="submit" className="btn btn-primary my-1" />
-    </form>
+      <button onClick={submit} className="btn btn-primary my-1">
+        Submit
+      </button>
+    </div>
   );
 };
 
 export default AddExperience;
 
 interface AddExperienceProps {
-  addExperience: (experience: ExperienceType) => void;
+  submitter: (experience: ExperienceType) => void;
 }

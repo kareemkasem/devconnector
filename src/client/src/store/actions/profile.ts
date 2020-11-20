@@ -37,6 +37,3 @@ export const createOrUpdateProfile = (
    * need to start working on this thing
    ******************************************************************/
 };
-
-export const addExperience = () => {};
-export const addEducation = () => {};

@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { EducationType } from "../../global.types";
 
-function AddEducation({ addEducation }: AddEducationProps) {
+function AddEducation({ submitter }: AddEducationProps) {
   const initialState: EducationType = {
     school: "",
     degree: "",
@@ -36,14 +36,20 @@ function AddEducation({ addEducation }: AddEducationProps) {
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   };
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    addEducation(formData);
+  const addEducation = (
+    data: EducationType,
+    dataSubmitter: (data: EducationType) => void
+  ) => {
+    dataSubmitter(data);
+  };
+
+  const submit = () => {
+    addEducation(formData, submitter);
     setFormData(initialState);
   };
 
   return (
-    <form className="form" onSubmit={onSubmit}>
+    <div className="form">
       <div className="form-group">
         <input
           type="text"
@@ -61,7 +67,6 @@ function AddEducation({ addEducation }: AddEducationProps) {
           name="degree"
           value={degree}
           onChange={onChange}
-          required
         />
       </div>
       <div className="form-group">
@@ -113,13 +118,15 @@ function AddEducation({ addEducation }: AddEducationProps) {
           onChange={onChange}
         />
       </div>
-      <input type="submit" className="btn btn-primary my-1" />
-    </form>
+      <button className="btn btn-primary my-1" onClick={submit}>
+        Submit
+      </button>
+    </div>
   );
 }
 
 export default AddEducation;
 
 interface AddEducationProps {
-  addEducation: (education: EducationType) => void;
+  submitter: (education: EducationType) => void;
 }

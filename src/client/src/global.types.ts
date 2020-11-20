@@ -57,8 +57,8 @@ export interface ProfileType {
   status: string;
   skills: string[];
   social?: { twitter?: string; linkedIn?: string; youtube?: string };
-  experience?: ExperienceType[];
-  education?: EducationType[];
+  experience: ExperienceType[];
+  education: EducationType[];
 }
 
 interface ExtendedProfileType extends ProfileType {
