@@ -28,7 +28,27 @@ export interface SignupParams extends LoginParams {
   name: string;
 }
 
-export interface BasicProfileType {
+export interface EducationType {
+  school: string;
+  degree: string;
+  fieldOfStudy: string;
+  from: Date;
+  to?: Date;
+  description: string;
+  current?: boolean;
+}
+
+export interface ExperienceType {
+  jobTitle: string;
+  company: string;
+  location: string;
+  from: Date;
+  to?: Date;
+  description?: string;
+  current?: boolean;
+}
+
+export interface ProfileType {
   bio?: string;
   githubusername?: string;
   company?: string;
@@ -37,33 +57,13 @@ export interface BasicProfileType {
   status: string;
   skills: string[];
   social?: { twitter?: string; linkedIn?: string; youtube?: string };
+  experience?: ExperienceType[];
+  education?: EducationType[];
 }
 
-export interface ProfileType extends BasicProfileType {
-  _id: string;
+interface ExtendedProfileType extends ProfileType {
   user: {
-    _id: string;
     name: string;
     avatar: string;
   };
-  experience: {
-    _id: string;
-    jobTitle: string;
-    company: string;
-    location: string;
-    from: Date;
-    to?: Date;
-    description?: string;
-    current?: Boolean;
-  }[];
-  education: {
-    _id: string;
-    school: string;
-    degree: string;
-    fieldOfStudy: string;
-    from: Date;
-    to?: Date;
-    description: string;
-    current?: Boolean;
-  }[];
 }

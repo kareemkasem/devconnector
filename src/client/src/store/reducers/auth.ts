@@ -14,7 +14,7 @@ const initialState: AuthState = {
   token: localStorage.getItem("token"),
   isAuthenticated: false,
   user: null,
-  loading: true,
+  loading: false,
 };
 
 const authReducer = (

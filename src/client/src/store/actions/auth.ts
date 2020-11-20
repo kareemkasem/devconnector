@@ -23,7 +23,6 @@ import {
 } from "./action.types";
 import { LoginParams, SignupParams, UserType } from "../../global.types";
 import alertErrors from "../../utils/redux-alert-errors";
-import AxiosConfig from "../../axios.config";
 import axiosInstance from "../../axios.config";
 
 export const loadUser = () => async (

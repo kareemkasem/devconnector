@@ -8,6 +8,7 @@ import Login from "./components/auth/login";
 import Signup from "./components/auth/signup";
 import Profiles from "./components/profiles";
 import DashBoard from "./components/dashboard/dashboard";
+import CreateProfile from "./components/profile-forms/create-profile";
 
 function Routes() {
   return (
@@ -37,6 +38,11 @@ function Routes() {
             />
             <Route path="/profiles" exact component={Profiles} />
             <ProtectedRoute path="/dashboard" exact element={<DashBoard />} />
+            <ProtectedRoute
+              path="/create-profile"
+              exact
+              element={<CreateProfile />}
+            />
           </section>
         </>
       </Switch>

@@ -527,6 +527,16 @@ button {
   align-items: center;
 }
 
+.boxed {
+  display: inline;
+  background-color: rgb(246, 250, 253);
+  padding: 20px;
+  margin: 15px;
+  margin-left: 0px;
+  border: 2px var(--primary-color) solid;
+  border-radius: 20px;
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
