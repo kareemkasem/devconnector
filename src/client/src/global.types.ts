@@ -61,9 +61,6 @@ export interface ProfileType {
   education: EducationType[];
 }
 
-interface ExtendedProfileType extends ProfileType {
-  user: {
-    name: string;
-    avatar: string;
-  };
+export interface ExtendedProfileType extends ProfileType {
+  user: string;
 }

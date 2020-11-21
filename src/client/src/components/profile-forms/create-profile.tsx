@@ -10,9 +10,11 @@ import {
 import ExperienceAndEducation from "./expirenceAndEducation";
 import Skills from "./skills";
 import Social from "./social";
+import { MoonLoader } from "react-spinners";
 
 function CreateProfile({
   profileData,
+  profileLoading,
   createOrUpdateProfile,
   getCurrentUserProfile,
 }: createProfileProps) {
@@ -26,12 +28,16 @@ function CreateProfile({
       : {
           skills: [""],
           status: "",
-          bio: "",
-          company: "",
-          githubusername: "",
-          location: "",
-          social: {},
-          website: "",
+          bio: undefined,
+          company: undefined,
+          githubusername: undefined,
+          location: undefined,
+          social: {
+            youtube: undefined,
+            linkedIn: undefined,
+            twitter: undefined,
+          },
+          website: undefined,
           education: [],
           experience: [],
         }
@@ -40,6 +46,14 @@ function CreateProfile({
   useEffect(() => {
     if (profileData) setFormData(profileData);
   }, [profileData]);
+
+  if (profileLoading) {
+    return (
+      <div className="loader-page">
+        <MoonLoader loading={true} size={100} color="#00A3B8" />;
+      </div>
+    );
+  }
 
   const { status, bio, company, githubusername, location, website } = formData;
 
@@ -54,7 +68,7 @@ function CreateProfile({
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    createOrUpdateProfile(formData, !!profileData);
+    createOrUpdateProfile(formData);
   };
 
   return (
@@ -162,6 +176,7 @@ function CreateProfile({
 
 const mapStateToProps = (state: AppState) => ({
   profileData: state.profile.profile,
+  profileLoading: state.profile.loading,
 });
 
 export default connect(mapStateToProps, {
@@ -172,5 +187,6 @@ export default connect(mapStateToProps, {
 interface createProfileProps {
   profileData: ProfileType | null;
   getCurrentUserProfile: VoidFunction;
-  createOrUpdateProfile: (data: ProfileType, edit: boolean) => void;
+  createOrUpdateProfile: (data: ProfileType) => void;
+  profileLoading: boolean;
 }

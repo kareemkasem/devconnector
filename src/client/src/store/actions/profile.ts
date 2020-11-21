@@ -1,9 +1,18 @@
 import axiosInstance from "../../axios.config";
-import { GET_PROFILE, PROFILE_ERROR } from "./action.types";
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  SetAlertType,
+  updateProfileFailedType,
+  updateProfileType,
+  UPDATE_PROFILE,
+  UPDATE_PROFILE_FAILED,
+} from "./action.types";
 import { GetProfileType, ProfileErrorType } from "./action.types";
 import { Dispatch } from "redux";
-import { ProfileType } from "../../global.types";
+import { ExtendedProfileType, ProfileType } from "../../global.types";
 import { AxiosResponse } from "axios";
+import alertError from "../../utils/redux-alert-errors";
 
 export const getCurrentUserProfile = () => async (
   dispatch: Dispatch<GetProfileType | ProfileErrorType>
@@ -28,12 +37,23 @@ export const getCurrentUserProfile = () => async (
   }
 };
 
-export const createOrUpdateProfile = (
-  formData: ProfileType,
-  edit: boolean = false
-) => async (dispatch: Dispatch<any>) => {
-  const res = await axiosInstance().post("/api/profile", formData);
-  /******************************************************************
-   * need to start working on this thing
-   ******************************************************************/
+export const createOrUpdateProfile = (data: ProfileType) => async (
+  dispatch: Dispatch<updateProfileType | updateProfileFailedType | SetAlertType>
+) => {
+  try {
+    const result = await axiosInstance().post<
+      any,
+      AxiosResponse<ExtendedProfileType>
+    >("/api/profile", data);
+    const { user, ...profileData } = result.data;
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: profileData,
+    });
+  } catch (error) {
+    alertError(error, dispatch);
+    dispatch({
+      type: UPDATE_PROFILE_FAILED,
+    });
+  }
 };

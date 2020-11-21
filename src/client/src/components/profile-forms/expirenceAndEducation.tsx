@@ -40,8 +40,8 @@ function ExperienceAndEducation({
       <div style={{ display: "flex" }}>
         {
           //@ts-ignore
-          experience.map(exp => (
-            <div className="boxed">
+          experience.map((exp, index) => (
+            <div className="boxed" key={index}>
               <p>
                 <strong>Job Title:</strong> {exp.jobTitle}
               </p>
@@ -81,8 +81,8 @@ function ExperienceAndEducation({
       <div style={{ display: "flex" }}>
         {
           //@ts-ignore
-          education.map(edu => (
-            <div className="boxed">
+          education.map((edu, index) => (
+            <div className="boxed" key={index}>
               <p>
                 <strong>Field:</strong> {edu.fieldOfStudy}
               </p>

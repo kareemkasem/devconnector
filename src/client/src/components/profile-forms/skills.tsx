@@ -30,7 +30,7 @@ function Skills({
     <>
       <h1>Skills: </h1>
       {skills.map((skill, index) => (
-        <div className="form-group" style={{ display: "flex" }}>
+        <div className="form-group" style={{ display: "flex" }} key={index}>
           <input
             type="text"
             placeholder="Enter Skill"

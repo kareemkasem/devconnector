@@ -3,6 +3,7 @@ import { AlertType, ProfileType, UserType } from "../../global.types";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
+export const CLEAR_ALERTS = "CLEAR_ALERTS";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const USER_LOADED = "USER_LOADED";
@@ -13,6 +14,8 @@ export const LOGOUT = "LOGOUT";
 export const GET_PROFILE = "GET_PROFILE";
 export const PROFILE_ERROR = "PROFILE_ERROR";
 export const CLEAR_PROFILE = "CLEAR_PROFILE";
+export const UPDATE_PROFILE = "UPDATE_PROFILE";
+export const UPDATE_PROFILE_FAILED = "UPDATE_PROFILE_FAILED";
 
 export interface SetAlertType {
   type: typeof SET_ALERT;
@@ -23,6 +26,9 @@ export interface RemoveAlertType {
   payload: {
     id: string;
   };
+}
+export interface clearAlertsType {
+  type: typeof CLEAR_ALERTS;
 }
 export interface SignupSuccessType {
   type: typeof SIGNUP_SUCCESS;
@@ -63,11 +69,19 @@ export interface ProfileErrorType {
 export interface ClearProfileType {
   type: typeof CLEAR_PROFILE;
 }
+export interface updateProfileType {
+  type: typeof UPDATE_PROFILE;
+  payload: ProfileType;
+}
+export interface updateProfileFailedType {
+  type: typeof UPDATE_PROFILE_FAILED;
+}
 
 export type AppActionTypes =
   | CallHistoryMethodAction //for router bindings
   | SetAlertType
   | RemoveAlertType
+  | clearAlertsType
   | SignupSuccessType
   | SignupFailType
   | UserLoadedType
@@ -77,4 +91,6 @@ export type AppActionTypes =
   | LogoutType
   | GetProfileType
   | ProfileErrorType
-  | ClearProfileType;
+  | ClearProfileType
+  | updateProfileType
+  | updateProfileFailedType;

@@ -4,6 +4,8 @@ import {
   CLEAR_PROFILE,
   GET_PROFILE,
   PROFILE_ERROR,
+  UPDATE_PROFILE,
+  UPDATE_PROFILE_FAILED,
 } from "../actions/action.types";
 
 const initialState: ProfileState = {
@@ -20,6 +22,7 @@ const profileReducer = (
 ): ProfileState => {
   switch (action.type) {
     case GET_PROFILE:
+    case UPDATE_PROFILE:
       return {
         ...state,
         profile: action.payload,
@@ -37,6 +40,12 @@ const profileReducer = (
       return {
         ...state,
         profile: null,
+        loading: false,
+      };
+
+    case UPDATE_PROFILE_FAILED:
+      return {
+        ...state,
         loading: false,
       };
 
