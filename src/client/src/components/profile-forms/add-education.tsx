@@ -57,7 +57,6 @@ function AddEducation({ submitter }: AddEducationProps) {
           name="school"
           value={school}
           onChange={onChange}
-          required
         />
       </div>
       <div className="form-group">

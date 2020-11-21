@@ -62,7 +62,7 @@ function CreateProfile({
   ) => {
     setFormData({
       ...formData,
-      [e.currentTarget.name]: [e.currentTarget.value],
+      [e.currentTarget.name]: e.currentTarget.value,
     });
   };
 

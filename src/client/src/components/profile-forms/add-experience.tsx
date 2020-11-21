@@ -58,7 +58,6 @@ const AddExperience = ({ submitter }: AddExperienceProps) => {
           name="jobTitle"
           value={jobTitle}
           onChange={onChange}
-          required
         />
       </div>
       <div className="form-group">
@@ -68,7 +67,6 @@ const AddExperience = ({ submitter }: AddExperienceProps) => {
           name="company"
           value={company}
           onChange={onChange}
-          required
         />
       </div>
       <div className="form-group">
