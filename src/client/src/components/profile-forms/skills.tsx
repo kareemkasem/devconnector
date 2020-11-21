@@ -48,11 +48,7 @@ function Skills({
           </button>
         </div>
       ))}
-      <button
-        className="btn btn-secondary"
-        onClick={addSkillField}
-        type="button"
-      >
+      <button className="btn btn-primary" onClick={addSkillField} type="button">
         Add Skill
       </button>
     </>

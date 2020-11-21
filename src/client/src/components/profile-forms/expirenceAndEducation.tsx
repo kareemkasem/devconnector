@@ -71,7 +71,7 @@ function ExperienceAndEducation({
         onClick={toggleAddExperience}
         className="btn btn-primary my-1"
       >
-        {showAddExperience ? "Hide" : "Add"}
+        {showAddExperience ? "Hide" : "Add Experience"}
       </button>
       {showAddExperience ? (
         <AddExperience submitter={submitExperience} />
@@ -112,7 +112,7 @@ function ExperienceAndEducation({
         onClick={toggleAddEducation}
         className="btn btn-primary my-1"
       >
-        {showAddEducation ? "Hide" : "Add"}
+        {showAddEducation ? "Hide" : "Add Education"}
       </button>
       {showAddEducation ? <AddEducation submitter={submitEducation} /> : null}
     </>

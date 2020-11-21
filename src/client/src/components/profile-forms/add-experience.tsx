@@ -121,7 +121,7 @@ const AddExperience = ({ submitter }: AddExperienceProps) => {
         />
       </div>
       <button onClick={submit} className="btn btn-primary my-1">
-        Submit
+        save
       </button>
     </div>
   );

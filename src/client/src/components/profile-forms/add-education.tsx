@@ -118,7 +118,7 @@ function AddEducation({ submitter }: AddEducationProps) {
         />
       </div>
       <button className="btn btn-primary my-1" onClick={submit}>
-        Submit
+        save
       </button>
     </div>
   );
