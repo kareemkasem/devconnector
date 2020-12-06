@@ -1,8 +1,12 @@
 import moment from "moment";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { ExperienceType } from "../../global.types";
 
-const AddExperience = ({ submitter }: AddExperienceProps) => {
+const AddExperience = ({
+  submitter,
+  deleter,
+  initialData,
+}: AddExperienceProps) => {
   const initialState: ExperienceType = {
     company: "",
     jobTitle: "",
@@ -13,7 +17,9 @@ const AddExperience = ({ submitter }: AddExperienceProps) => {
     description: "",
   };
 
-  const [formData, setFormData] = useState<ExperienceType>(initialState);
+  const [formData, setFormData] = useState<ExperienceType>(
+    initialData ? initialData : initialState
+  );
 
   const {
     company,
@@ -36,17 +42,13 @@ const AddExperience = ({ submitter }: AddExperienceProps) => {
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   };
 
-  const addExperience = (
-    data: ExperienceType,
-    dataSubmitter: (data: ExperienceType) => void
-  ) => {
-    dataSubmitter(data);
+  const submit = () => {
+    submitter(formData);
+    setFormData(initialState);
   };
 
-  const submit = (e: FormEvent) => {
-    e.preventDefault();
-    addExperience(formData, submitter);
-    setFormData(initialState);
+  const handleDeleter = () => {
+    deleter(formData);
   };
 
   return (
@@ -120,9 +122,16 @@ const AddExperience = ({ submitter }: AddExperienceProps) => {
           onChange={onChange}
         />
       </div>
-      <button onClick={submit} className="btn btn-primary my-1">
-        save
-      </button>
+      <div className="btn-group">
+        <button className="btn btn-primary my-1" onClick={submit}>
+          save
+        </button>
+        {initialData ? (
+          <button className="btn btn-danger my-1" onClick={handleDeleter}>
+            delete
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 };
@@ -131,4 +140,6 @@ export default AddExperience;
 
 interface AddExperienceProps {
   submitter: (experience: ExperienceType) => void;
+  deleter: (experience: ExperienceType) => void;
+  initialData?: ExperienceType;
 }

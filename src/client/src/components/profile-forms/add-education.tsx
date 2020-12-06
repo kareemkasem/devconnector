@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { ChangeEvent, useState } from "react";
 import { EducationType } from "../../global.types";
 
-function AddEducation({ submitter }: AddEducationProps) {
+function AddEducation({ submitter, deleter, initialData }: AddEducationProps) {
   const initialState: EducationType = {
     school: "",
     degree: "",
@@ -13,7 +13,9 @@ function AddEducation({ submitter }: AddEducationProps) {
     description: "",
   };
 
-  const [formData, setFormData] = useState<EducationType>(initialState);
+  const [formData, setFormData] = useState<EducationType>(
+    initialData ? initialData : initialState
+  );
 
   const {
     school,
@@ -36,16 +38,13 @@ function AddEducation({ submitter }: AddEducationProps) {
     setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
   };
 
-  const addEducation = (
-    data: EducationType,
-    dataSubmitter: (data: EducationType) => void
-  ) => {
-    dataSubmitter(data);
+  const submit = () => {
+    submitter(formData);
+    setFormData(initialState);
   };
 
-  const submit = () => {
-    addEducation(formData, submitter);
-    setFormData(initialState);
+  const handleDeleter = () => {
+    deleter(formData);
   };
 
   return (
@@ -117,9 +116,16 @@ function AddEducation({ submitter }: AddEducationProps) {
           onChange={onChange}
         />
       </div>
-      <button className="btn btn-primary my-1" onClick={submit}>
-        save
-      </button>
+      <div className="btn-group">
+        <button className="btn btn-primary my-1" onClick={submit}>
+          save
+        </button>
+        {initialData ? (
+          <button className="btn btn-danger my-1" onClick={handleDeleter}>
+            delete
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -128,4 +134,6 @@ export default AddEducation;
 
 interface AddEducationProps {
   submitter: (education: EducationType) => void;
+  deleter: (education: EducationType) => void;
+  initialData?: EducationType;
 }

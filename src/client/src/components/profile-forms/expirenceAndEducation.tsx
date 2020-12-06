@@ -17,23 +17,61 @@ function ExperienceAndEducation({
   const [showAddExperience, setshowAddExperience] = useState<boolean>(false);
   const [showAddEducation, setshowAddEducation] = useState<boolean>(false);
 
-  const toggleAddExperience = () => {
+  const [currentExperience, setCurrentExperience] = useState<
+    ExperienceType | undefined
+  >(undefined);
+  const [currentEducation, setCurrentEducation] = useState<
+    EducationType | undefined
+  >(undefined);
+
+  const toggleAddExperience = (exp?: ExperienceType) => {
     setshowAddExperience(!showAddExperience);
+    setCurrentExperience(exp ? exp : undefined);
   };
 
-  const toggleAddEducation = () => {
+  const toggleAddEducation = (edu?: EducationType) => {
     setshowAddEducation(!showAddEducation);
+    setCurrentEducation(edu ? edu : undefined);
   };
 
   const submitExperience = (exp: ExperienceType) => {
-    const modifiedExperience = [...experience, exp];
+    let modifiedExperience: ExperienceType[];
+    if (currentExperience) {
+      modifiedExperience = experience.map((val, ind) =>
+        val === currentExperience ? exp : val
+      );
+    } else {
+      modifiedExperience = [...experience, exp];
+    }
     setFormData({ ...formData, experience: modifiedExperience });
+    setshowAddExperience(false);
   };
 
   const submitEducation = (edu: EducationType) => {
-    const modifiedEducation = [...education, edu];
+    let modifiedEducation: EducationType[];
+    if (currentEducation) {
+      modifiedEducation = education.map(val =>
+        val === currentEducation ? edu : val
+      );
+    } else {
+      modifiedEducation = [...education, edu];
+    }
     setFormData({ ...formData, education: modifiedEducation });
+    setshowAddEducation(false);
   };
+
+  const deleteExperience = (exp: ExperienceType) => {
+    const modifiedExperience = experience.filter(val => val !== exp);
+    setFormData({ ...formData, experience: modifiedExperience });
+    setshowAddExperience(false);
+  };
+
+  const deleteEducation = (edu: EducationType) => {
+    const modifiedEducation = education.filter(val => val !== edu);
+    setFormData({ ...formData, education: modifiedEducation });
+    setshowAddEducation(false);
+  };
+
   return (
     <>
       <h1>Experience: </h1>
@@ -41,7 +79,11 @@ function ExperienceAndEducation({
         {
           //@ts-ignore
           experience.map((exp, index) => (
-            <div className="boxed" key={index}>
+            <div
+              className="boxed"
+              key={index}
+              onClick={() => toggleAddExperience(exp)}
+            >
               <p>
                 <strong>Job Title:</strong> {exp.jobTitle}
               </p>
@@ -68,13 +110,17 @@ function ExperienceAndEducation({
       </div>
       <button
         type="button"
-        onClick={toggleAddExperience}
+        onClick={() => toggleAddExperience()}
         className="btn btn-primary my-1"
       >
         {showAddExperience ? "Hide" : "Add Experience"}
       </button>
       {showAddExperience ? (
-        <AddExperience submitter={submitExperience} />
+        <AddExperience
+          submitter={submitExperience}
+          deleter={deleteExperience}
+          initialData={currentExperience}
+        />
       ) : null}
 
       <h1>Education: </h1>
@@ -82,7 +128,11 @@ function ExperienceAndEducation({
         {
           //@ts-ignore
           education.map((edu, index) => (
-            <div className="boxed" key={index}>
+            <div
+              className="boxed"
+              key={index}
+              onClick={() => toggleAddEducation(edu)}
+            >
               <p>
                 <strong>Field:</strong> {edu.fieldOfStudy}
               </p>
@@ -109,12 +159,18 @@ function ExperienceAndEducation({
       </div>
       <button
         type="button"
-        onClick={toggleAddEducation}
+        onClick={() => toggleAddEducation()}
         className="btn btn-primary my-1"
       >
         {showAddEducation ? "Hide" : "Add Education"}
       </button>
-      {showAddEducation ? <AddEducation submitter={submitEducation} /> : null}
+      {showAddEducation ? (
+        <AddEducation
+          submitter={submitEducation}
+          deleter={deleteEducation}
+          initialData={currentEducation}
+        />
+      ) : null}
     </>
   );
 }
