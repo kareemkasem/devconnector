@@ -1,5 +1,7 @@
 import axiosInstance from "../../axios.config";
 import {
+  deleteAccountType,
+  DELETE_ACCOUT,
   GET_PROFILE,
   PROFILE_ERROR,
   SetAlertType,
@@ -55,5 +57,16 @@ export const createOrUpdateProfile = (data: ProfileType) => async (
     dispatch({
       type: UPDATE_PROFILE_FAILED,
     });
+  }
+};
+
+export const deleteAccount = () => async (
+  dispatch: Dispatch<deleteAccountType>
+) => {
+  try {
+    await axiosInstance().delete<any, AxiosResponse>("/api/user/delete");
+    dispatch({ type: DELETE_ACCOUT });
+  } catch (error) {
+    alertError(error, dispatch);
   }
 };

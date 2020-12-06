@@ -16,6 +16,7 @@ export const PROFILE_ERROR = "PROFILE_ERROR";
 export const CLEAR_PROFILE = "CLEAR_PROFILE";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const UPDATE_PROFILE_FAILED = "UPDATE_PROFILE_FAILED";
+export const DELETE_ACCOUT = "DELETE_ACCOUNT";
 
 export interface SetAlertType {
   type: typeof SET_ALERT;
@@ -76,6 +77,9 @@ export interface updateProfileType {
 export interface updateProfileFailedType {
   type: typeof UPDATE_PROFILE_FAILED;
 }
+export interface deleteAccountType {
+  type: typeof DELETE_ACCOUT;
+}
 
 export type AppActionTypes =
   | CallHistoryMethodAction //for router bindings
@@ -93,4 +97,5 @@ export type AppActionTypes =
   | ProfileErrorType
   | ClearProfileType
   | updateProfileType
-  | updateProfileFailedType;
+  | updateProfileFailedType
+  | deleteAccountType;

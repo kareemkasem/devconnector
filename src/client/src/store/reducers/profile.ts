@@ -2,6 +2,7 @@ import { ProfileType } from "../../global.types";
 import {
   AppActionTypes,
   CLEAR_PROFILE,
+  DELETE_ACCOUT,
   GET_PROFILE,
   PROFILE_ERROR,
   UPDATE_PROFILE,
@@ -46,6 +47,12 @@ const profileReducer = (
     case UPDATE_PROFILE_FAILED:
       return {
         ...state,
+        loading: false,
+      };
+
+    case DELETE_ACCOUT:
+      return {
+        ...initialState,
         loading: false,
       };
 

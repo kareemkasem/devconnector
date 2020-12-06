@@ -7,6 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  DELETE_ACCOUT,
 } from "../actions/action.types";
 import { UserType } from "../../global.types";
 
@@ -44,6 +45,7 @@ const authReducer = (
     case LOGIN_FAIL:
     case AUTH_ERROR:
     case LOGOUT:
+    case DELETE_ACCOUT:
       localStorage.removeItem("token");
       return {
         user: null,

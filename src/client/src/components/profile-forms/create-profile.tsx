@@ -6,6 +6,7 @@ import { AppState } from "../../store/configureStore";
 import {
   createOrUpdateProfile,
   getCurrentUserProfile,
+  deleteAccount,
 } from "../../store/actions/profile";
 import ExperienceAndEducation from "./expirenceAndEducation";
 import Skills from "./skills";
@@ -17,6 +18,7 @@ function CreateProfile({
   profileLoading,
   createOrUpdateProfile,
   getCurrentUserProfile,
+  deleteAccount,
 }: createProfileProps) {
   useEffect(() => {
     getCurrentUserProfile();
@@ -50,7 +52,7 @@ function CreateProfile({
   if (profileLoading) {
     return (
       <div className="loader-page">
-        <MoonLoader loading={true} size={100} color="#00A3B8" />;
+        <MoonLoader loading={true} size={100} color="#00A3B8" />
       </div>
     );
   }
@@ -69,6 +71,13 @@ function CreateProfile({
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     createOrUpdateProfile(formData);
+  };
+
+  const deleteAccountHandler = () => {
+    const confirmation = window.confirm(
+      "are you sure you want to delete your account ?"
+    );
+    if (confirmation) deleteAccount();
   };
 
   return (
@@ -162,6 +171,16 @@ function CreateProfile({
         <ExperienceAndEducation formData={formData} setFormData={setFormData} />
 
         <div className="my-1">
+          <button
+            type="button"
+            className="btn btn-danger my-1"
+            onClick={deleteAccountHandler}
+          >
+            Delete Account
+          </button>
+        </div>
+
+        <div className="my-1">
           <button type="submit" className="btn btn-primary my-1">
             Save
           </button>
@@ -182,11 +201,13 @@ const mapStateToProps = (state: AppState) => ({
 export default connect(mapStateToProps, {
   createOrUpdateProfile,
   getCurrentUserProfile,
+  deleteAccount,
 })(CreateProfile);
 
 interface createProfileProps {
   profileData: ProfileType | null;
   getCurrentUserProfile: VoidFunction;
   createOrUpdateProfile: (data: ProfileType) => void;
+  deleteAccount: VoidFunction;
   profileLoading: boolean;
 }
