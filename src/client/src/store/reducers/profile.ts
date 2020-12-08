@@ -2,7 +2,10 @@ import { ProfileType } from "../../global.types";
 import {
   AppActionTypes,
   CLEAR_PROFILE,
+  CLEAR_PROFILES,
   DELETE_ACCOUT,
+  GET_ALL_PROFILES,
+  GET_GITHUB_REPOS,
   GET_PROFILE,
   PROFILE_ERROR,
   UPDATE_PROFILE,
@@ -30,6 +33,13 @@ const profileReducer = (
         loading: false,
       };
 
+    case GET_ALL_PROFILES:
+      return {
+        ...state,
+        profiles: action.payload,
+        loading: false,
+      };
+
     case PROFILE_ERROR:
       return {
         ...state,
@@ -41,6 +51,14 @@ const profileReducer = (
       return {
         ...state,
         profile: null,
+        repos: [],
+        loading: false,
+      };
+
+    case CLEAR_PROFILES:
+      return {
+        ...state,
+        profiles: [],
         loading: false,
       };
 
@@ -54,6 +72,13 @@ const profileReducer = (
       return {
         ...initialState,
         loading: false,
+      };
+
+    case GET_GITHUB_REPOS:
+      return {
+        ...state,
+        loading: false,
+        repos: action.payload,
       };
 
     default:

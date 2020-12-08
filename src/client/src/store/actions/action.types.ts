@@ -12,11 +12,15 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 export const GET_PROFILE = "GET_PROFILE";
+export const GET_PROFILE_BY_ID = "GET_PROFILE_BY_ID";
+export const GET_ALL_PROFILES = "GET_ALL_PROFILES";
 export const PROFILE_ERROR = "PROFILE_ERROR";
 export const CLEAR_PROFILE = "CLEAR_PROFILE";
+export const CLEAR_PROFILES = "CLEAR_PROFILES";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const UPDATE_PROFILE_FAILED = "UPDATE_PROFILE_FAILED";
 export const DELETE_ACCOUT = "DELETE_ACCOUNT";
+export const GET_GITHUB_REPOS = "GET_GITHUB_REPOS";
 
 export interface SetAlertType {
   type: typeof SET_ALERT;
@@ -63,6 +67,14 @@ export interface GetProfileType {
   type: typeof GET_PROFILE;
   payload: ProfileType;
 }
+export interface GetProfileByIdType {
+  type: typeof GET_PROFILE_BY_ID;
+  payload: ProfileType;
+}
+export interface GetAllProfilesType {
+  type: typeof GET_ALL_PROFILES;
+  payload: ProfileType[];
+}
 export interface ProfileErrorType {
   type: typeof PROFILE_ERROR;
   payload: { status: string; statusText: string };
@@ -70,15 +82,22 @@ export interface ProfileErrorType {
 export interface ClearProfileType {
   type: typeof CLEAR_PROFILE;
 }
-export interface updateProfileType {
+export interface ClearProfilesType {
+  type: typeof CLEAR_PROFILES;
+}
+export interface UpdateProfileType {
   type: typeof UPDATE_PROFILE;
   payload: ProfileType;
 }
-export interface updateProfileFailedType {
+export interface UpdateProfileFailedType {
   type: typeof UPDATE_PROFILE_FAILED;
 }
-export interface deleteAccountType {
+export interface DeleteAccountType {
   type: typeof DELETE_ACCOUT;
+}
+export interface GetGithubReposType {
+  type: typeof GET_GITHUB_REPOS;
+  payload: any;
 }
 
 export type AppActionTypes =
@@ -94,8 +113,12 @@ export type AppActionTypes =
   | LoginFailType
   | LogoutType
   | GetProfileType
+  | GetProfileByIdType
+  | GetAllProfilesType
   | ProfileErrorType
   | ClearProfileType
-  | updateProfileType
-  | updateProfileFailedType
-  | deleteAccountType;
+  | ClearProfilesType
+  | UpdateProfileType
+  | UpdateProfileFailedType
+  | DeleteAccountType
+  | GetGithubReposType;
