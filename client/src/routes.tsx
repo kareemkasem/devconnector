@@ -9,6 +9,7 @@ import Signup from "./components/auth/signup";
 import DashBoard from "./components/dashboard/dashboard";
 import CreateProfile from "./components/profile-forms/create-profile";
 import Profiles from "./components/profiles/profiles";
+import profile from "./components/profile/profile";
 
 function Routes() {
   return (
@@ -38,6 +39,7 @@ function Routes() {
             />
             <ProtectedRoute path="/dashboard" exact element={<DashBoard />} />
             <Route path="/profiles" exact component={Profiles} />
+            <Route path="/profile/:userId" exact component={profile} />
             <ProtectedRoute
               path="/create-profile"
               exact

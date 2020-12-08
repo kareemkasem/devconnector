@@ -1,13 +1,13 @@
+import { ObjectID } from "mongodb";
 import Profile from "../../models/profile";
 
 export default async (req, res) => {
-  const userId = req.param.userId;
+  const userId = req.params.userId;
 
   try {
-    const profile = await Profile.findOne({ user: userId }).populate("user", [
-      "name",
-      "avatar",
-    ]);
+    const profile = await Profile.findOne({
+      user: userId,
+    }).populate("user", ["name", "avatar"]);
 
     if (!profile) {
       return res.status(404).json({ errors: [{ msg: "profile not found" }] });

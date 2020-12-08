@@ -7,6 +7,7 @@ import {
   GET_ALL_PROFILES,
   GET_GITHUB_REPOS,
   GET_PROFILE,
+  GET_PROFILE_BY_ID,
   PROFILE_ERROR,
   UPDATE_PROFILE,
   UPDATE_PROFILE_FAILED,
@@ -27,6 +28,7 @@ const profileReducer = (
   switch (action.type) {
     case GET_PROFILE:
     case UPDATE_PROFILE:
+    case GET_PROFILE_BY_ID:
       return {
         ...state,
         profile: action.payload,
