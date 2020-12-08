@@ -4,6 +4,7 @@ import { EducationType } from "../../global.types";
 
 function AddEducation({ submitter, deleter, initialData }: AddEducationProps) {
   const initialState: EducationType = {
+    _id: "",
     school: "",
     degree: "",
     fieldOfStudy: "",

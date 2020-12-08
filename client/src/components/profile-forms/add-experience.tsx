@@ -8,6 +8,7 @@ const AddExperience = ({
   initialData,
 }: AddExperienceProps) => {
   const initialState: ExperienceType = {
+    _id: "",
     company: "",
     jobTitle: "",
     location: "",

@@ -5,6 +5,7 @@ export interface AlertType {
 }
 
 export interface UserType {
+  _id: string;
   name: string;
   email: string;
   avatar: string;
@@ -29,6 +30,7 @@ export interface SignupParams extends LoginParams {
 }
 
 export interface EducationType {
+  _id: string;
   school: string;
   degree: string;
   fieldOfStudy: string;
@@ -39,6 +41,7 @@ export interface EducationType {
 }
 
 export interface ExperienceType {
+  _id: string;
   jobTitle: string;
   company: string;
   location: string;
