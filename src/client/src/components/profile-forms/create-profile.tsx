@@ -28,6 +28,8 @@ function CreateProfile({
     profileData
       ? profileData
       : {
+          _id: undefined,
+          user: undefined,
           skills: [""],
           status: "",
           bio: undefined,

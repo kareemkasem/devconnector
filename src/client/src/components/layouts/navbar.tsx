@@ -33,10 +33,10 @@ function Navbar({ logout, isAuthenticated }: NavbarProps) {
           <>
             <li>
               <i
-                className="fas fa-columns"
+                className="fas fa-sitemap"
                 style={{ marginLeft: "8px", marginRight: "-4px" }}
               />
-              <Link to="/dashboard">DashBoard</Link>
+              <Link to="/profiles">Developers</Link>
             </li>
             <li onClick={logout} className="a">
               <i

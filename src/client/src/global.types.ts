@@ -49,6 +49,12 @@ export interface ExperienceType {
 }
 
 export interface ProfileType {
+  _id?: string;
+  user?: {
+    _id: string;
+    name: string;
+    avatar: string;
+  };
   bio?: string;
   githubusername?: string;
   company?: string;
@@ -59,8 +65,4 @@ export interface ProfileType {
   social?: { twitter?: string; linkedIn?: string; youtube?: string };
   experience: ExperienceType[];
   education: EducationType[];
-}
-
-export interface ExtendedProfileType extends ProfileType {
-  user: string;
 }

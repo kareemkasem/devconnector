@@ -19,7 +19,7 @@ import {
   GET_GITHUB_REPOS,
 } from "./action.types";
 import { Dispatch } from "redux";
-import { ExtendedProfileType, ProfileType } from "../../global.types";
+import { ProfileType } from "../../global.types";
 import { AxiosResponse } from "axios";
 import alertError from "../../utils/redux-alert-errors";
 
@@ -95,10 +95,10 @@ export const createOrUpdateProfile = (data: ProfileType) => async (
   dispatch: Dispatch<UpdateProfileType | UpdateProfileFailedType | SetAlertType>
 ) => {
   try {
-    const result = await axiosInstance().post<
-      any,
-      AxiosResponse<ExtendedProfileType>
-    >("/api/profile", data);
+    const result = await axiosInstance().post<any, AxiosResponse<ProfileType>>(
+      "/api/profile",
+      data
+    );
     const { user, ...profileData } = result.data;
     dispatch({
       type: UPDATE_PROFILE,

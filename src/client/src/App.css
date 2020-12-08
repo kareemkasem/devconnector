@@ -632,3 +632,15 @@ button {
 .btn-group button {
   margin-right: 1rem;
 }
+
+.simple-flex {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+
+.simple-flex > * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  margin-right: 10px;
+}

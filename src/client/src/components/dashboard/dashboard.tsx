@@ -23,18 +23,22 @@ function DashBoard({ getCurrentUserProfile, auth, profile }: DashBoardProps) {
     return (
       <div>
         <h1 className="large text-primary">Dashboard</h1>
-        <p className="lead">
-          <i className="fas fa-user" /> Welcome {user && user.name}
-        </p>
-        {!profile ? (
-          <>has</>
-        ) : (
-          <>
-            <p>no profile info found.</p>
-            <Link to="/create-profile" className="btn btn-primary my-1">
-              Get Started
+        {profile ? (
+          <div className="simple-flex">
+            <p className="lead">
+              <i className="fas fa-user" /> Welcome {user && user.name}
+            </p>
+            <Link to="/create-profile" className="btn btn-secondary">
+              Edit Profile
             </Link>
-          </>
+          </div>
+        ) : (
+          <div className="simple-flex">
+            <p className="lead">no profile found 🤨</p>
+            <Link to="/create-profile" className="btn btn-primary">
+              create now !
+            </Link>
+          </div>
         )}
       </div>
     );
