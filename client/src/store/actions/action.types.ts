@@ -1,7 +1,7 @@
 import { CallHistoryMethodAction } from "connected-react-router";
 import {
   AlertType,
-  githubRepo,
+  GithubRepoType,
   ProfileType,
   UserType,
 } from "../../global.types";
@@ -102,7 +102,7 @@ export interface DeleteAccountType {
 }
 export interface GetGithubReposType {
   type: typeof GET_GITHUB_REPOS;
-  payload: githubRepo[];
+  payload: GithubRepoType[];
 }
 
 export type AppActionTypes =

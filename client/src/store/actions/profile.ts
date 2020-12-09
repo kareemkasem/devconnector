@@ -19,7 +19,7 @@ import {
   GET_GITHUB_REPOS,
 } from "./action.types";
 import { Dispatch } from "redux";
-import { githubRepo, ProfileType } from "../../global.types";
+import { GithubRepoType, ProfileType } from "../../global.types";
 import { AxiosResponse } from "axios";
 import alertError from "../../utils/redux-alert-errors";
 
@@ -129,7 +129,7 @@ export const getGithubRepos = (githubUsername: string) => async (
   try {
     const response = await axiosInstance().get<
       any,
-      AxiosResponse<githubRepo[]>
+      AxiosResponse<GithubRepoType[]>
     >(`/api/profile/github/${githubUsername}`);
     dispatch({
       type: GET_GITHUB_REPOS,

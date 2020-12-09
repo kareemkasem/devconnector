@@ -70,7 +70,7 @@ export interface ProfileType {
   education: EducationType[];
 }
 
-export interface githubRepo {
+export interface GithubRepoType {
   id: number;
   node_id: string;
   name: string;

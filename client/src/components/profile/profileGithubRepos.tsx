@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { githubRepo } from "../../global.types";
+import { GithubRepoType } from "../../global.types";
 import { getGithubRepos } from "../../store/actions/profile";
 import { AppState } from "../../store/configureStore";
 
@@ -48,6 +48,6 @@ export default connect(mapStateToProps, { getGithubRepos })(ProfileGithubRepos);
 
 interface ProfileGithubReposProps {
   username: string;
-  repos: githubRepo[];
+  repos: GithubRepoType[];
   getGithubRepos: (username: string) => void;
 }
