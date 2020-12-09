@@ -9,6 +9,7 @@ import ProfileExperience from "./profileExperience";
 import ProfileEducation from "./profileEducation";
 import ProfileTop from "./profileTop";
 import ProfileAbout from "./profileAbout";
+import ProfileGithubRepos from "./profileGithubRepos";
 
 function Profile({
   getProfileById,
@@ -34,7 +35,7 @@ function Profile({
             Back To Profiles
           </Link>
           {isAuth && currentUser.id === profile.user!._id && (
-            <Link to="/edit-profile" className="btn btn-dark">
+            <Link to="/create-profile" className="btn btn-dark">
               Edit Profile
             </Link>
           )}
@@ -73,7 +74,9 @@ function Profile({
               )}
             </div>
 
-            {profile.githubusername && <>profile.githubusername</>}
+            {profile.githubusername && (
+              <ProfileGithubRepos username={profile.githubusername} />
+            )}
           </div>
         </>
       )}

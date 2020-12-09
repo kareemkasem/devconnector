@@ -1,5 +1,10 @@
 import { CallHistoryMethodAction } from "connected-react-router";
-import { AlertType, ProfileType, UserType } from "../../global.types";
+import {
+  AlertType,
+  githubRepo,
+  ProfileType,
+  UserType,
+} from "../../global.types";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
@@ -97,7 +102,7 @@ export interface DeleteAccountType {
 }
 export interface GetGithubReposType {
   type: typeof GET_GITHUB_REPOS;
-  payload: any;
+  payload: githubRepo[];
 }
 
 export type AppActionTypes =

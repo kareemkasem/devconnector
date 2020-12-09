@@ -1,4 +1,4 @@
-import { ProfileType } from "../../global.types";
+import { githubRepo, ProfileType } from "../../global.types";
 import {
   AppActionTypes,
   CLEAR_PROFILE,
@@ -93,7 +93,7 @@ export default profileReducer;
 export interface ProfileState {
   profile: ProfileType | null;
   profiles: ProfileType[];
-  repos: any;
+  repos: githubRepo[];
   loading: boolean;
   error: { status: string; statusText: string } | {};
 }
