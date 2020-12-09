@@ -1,6 +1,7 @@
 import { CallHistoryMethodAction } from "connected-react-router";
 import {
   AlertType,
+  ClientErrorType,
   GithubRepoType,
   ProfileType,
   UserType,
@@ -26,6 +27,8 @@ export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const UPDATE_PROFILE_FAILED = "UPDATE_PROFILE_FAILED";
 export const DELETE_ACCOUT = "DELETE_ACCOUNT";
 export const GET_GITHUB_REPOS = "GET_GITHUB_REPOS";
+export const GET_POSTS = "GET_POSTS";
+export const POST_ERROR = "POST_ERROR";
 
 export interface SetAlertType {
   type: typeof SET_ALERT;
@@ -82,7 +85,7 @@ export interface GetAllProfilesType {
 }
 export interface ProfileErrorType {
   type: typeof PROFILE_ERROR;
-  payload: { status: string; statusText: string };
+  payload: ClientErrorType;
 }
 export interface ClearProfileType {
   type: typeof CLEAR_PROFILE;
@@ -103,6 +106,14 @@ export interface DeleteAccountType {
 export interface GetGithubReposType {
   type: typeof GET_GITHUB_REPOS;
   payload: GithubRepoType[];
+}
+export interface GetPostsType {
+  type: typeof GET_POSTS;
+  payload: string[];
+}
+export interface PostErrorType {
+  type: typeof POST_ERROR;
+  payload: ClientErrorType;
 }
 
 export type AppActionTypes =
@@ -126,4 +137,6 @@ export type AppActionTypes =
   | UpdateProfileType
   | UpdateProfileFailedType
   | DeleteAccountType
-  | GetGithubReposType;
+  | GetGithubReposType
+  | GetPostsType
+  | PostErrorType;

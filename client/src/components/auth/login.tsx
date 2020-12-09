@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { login } from "../../store/actions/auth";
-import { LoginParams } from "../../global.types";
+import { LoginParamsType } from "../../global.types";
 
 function Login({ login }: LoginProps) {
   const [formData, setFormData] = useState<FormData>({
@@ -69,5 +69,5 @@ interface FormData {
 }
 
 interface LoginProps {
-  login: (loginParams: LoginParams) => void;
+  login: (loginParams: LoginParamsType) => void;
 }

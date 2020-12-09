@@ -9,6 +9,7 @@ import { routerMiddleware } from "connected-react-router";
 import alertsReducer from "./reducers/alerts";
 import authReducer from "./reducers/auth";
 import profileReducer from "./reducers/profile";
+import postsReducer from "./reducers/posts";
 
 export const history = createBrowserHistory();
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   alerts: alertsReducer,
   auth: authReducer,
   profile: profileReducer,
+  posts: postsReducer,
 });
 
 const store: Store<AppState, any> = createStore(

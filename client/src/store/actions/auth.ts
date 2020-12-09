@@ -21,7 +21,7 @@ import {
   UserLoadedType,
   AuthErrorType,
 } from "./action.types";
-import { LoginParams, SignupParams, UserType } from "../../global.types";
+import { LoginParamsType, SignupParams, UserType } from "../../global.types";
 import alertErrors from "../../utils/redux-alert-errors";
 import axiosInstance from "../../axios.config";
 
@@ -73,7 +73,7 @@ export const signup = ({ name, email, password }: SignupParams) => async (
   }
 };
 
-export const login = ({ email, password }: LoginParams) => async (
+export const login = ({ email, password }: LoginParamsType) => async (
   dispatch: Dispatch<
     LoginSuccessType | LoginFailType | SetAlertType | UserLoadedType
   >

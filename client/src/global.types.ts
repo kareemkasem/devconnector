@@ -13,19 +13,24 @@ export interface UserType {
   id: string;
 }
 
-export interface ServerError {
+export interface ServerErrorType {
   msg: string;
   value?: any;
   param?: string;
   location?: string;
 }
 
-export interface LoginParams {
+export interface ClientErrorType {
+  status: string;
+  statusText: string;
+}
+
+export interface LoginParamsType {
   email: string;
   password: string;
 }
 
-export interface SignupParams extends LoginParams {
+export interface SignupParams extends LoginParamsType {
   name: string;
 }
 

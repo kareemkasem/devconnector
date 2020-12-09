@@ -1,4 +1,8 @@
-import { GithubRepoType, ProfileType } from "../../global.types";
+import {
+  ClientErrorType,
+  GithubRepoType,
+  ProfileType,
+} from "../../global.types";
 import {
   AppActionTypes,
   CLEAR_PROFILE,
@@ -95,5 +99,5 @@ export interface ProfileState {
   profiles: ProfileType[];
   repos: GithubRepoType[];
   loading: boolean;
-  error: { status: string; statusText: string } | {};
+  error: ClientErrorType | {};
 }
