@@ -1,8 +1,14 @@
-import { ClientErrorType } from "../../global.types";
-import { AppActionTypes, GET_POSTS, POST_ERROR } from "../actions/action.types";
+import { ClientErrorType, PostType } from "../../global.types";
+import {
+  AppActionTypes,
+  DELETE_POST,
+  GET_POSTS,
+  POST_ERROR,
+  UPDATE_LIKES,
+} from "../actions/action.types";
 
 const initialState: PostsState = {
-  post: "",
+  post: undefined,
   posts: [],
   loading: true,
   error: {},
@@ -16,6 +22,20 @@ const postsReducer = (
     case GET_POSTS:
       return { ...state, loading: false, posts: action.payload };
 
+    case UPDATE_LIKES:
+      const postsAfterLike: PostType[] = state.posts.map(post =>
+        post._id === action.payload.postId
+          ? { ...post, likes: action.payload.likes }
+          : post
+      );
+      return { ...state, loading: false, posts: postsAfterLike };
+
+    case DELETE_POST:
+      const postsAfterDelete: PostType[] = state.posts.filter(
+        post => post._id !== action.payload
+      );
+      return { ...state, loading: false, posts: postsAfterDelete };
+
     case POST_ERROR:
       return { ...state, loading: false, error: action.payload };
 
@@ -27,8 +47,8 @@ const postsReducer = (
 export default postsReducer;
 
 export interface PostsState {
-  post: string;
-  posts: string[];
+  post?: PostType;
+  posts: PostType[];
   loading: boolean;
   error: ClientErrorType | {};
 }

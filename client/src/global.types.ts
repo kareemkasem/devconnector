@@ -185,3 +185,22 @@ export interface GithubRepoType {
     node_id: string;
   };
 }
+
+export interface CommentType {
+  user: string;
+  avatar: string;
+  username: string;
+  content: string;
+  date: Date;
+}
+
+export interface PostType {
+  _id: string;
+  user: string;
+  username: string;
+  avatar: string;
+  content: string;
+  likes: string[];
+  comments: CommentType[];
+  date: Date;
+}

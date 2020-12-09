@@ -33,6 +33,13 @@ function Navbar({ logout, isAuthenticated }: NavbarProps) {
           <>
             <li>
               <i
+                className="fa fa-list-alt"
+                style={{ marginLeft: "8px", marginRight: "-4px" }}
+              />
+              <Link to="/posts">Posts</Link>
+            </li>
+            <li>
+              <i
                 className="fas fa-sitemap"
                 style={{ marginLeft: "8px", marginRight: "-4px" }}
               />

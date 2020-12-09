@@ -10,6 +10,7 @@ import DashBoard from "./components/dashboard/dashboard";
 import CreateProfile from "./components/profile-forms/create-profile";
 import Profiles from "./components/profiles/profiles";
 import profile from "./components/profile/profile";
+import Posts from "./components/posts/posts";
 
 function Routes() {
   return (
@@ -45,6 +46,7 @@ function Routes() {
               exact
               element={<CreateProfile />}
             />
+            <ProtectedRoute path="/posts" exact element={<Posts />} />
           </section>
         </>
       </Switch>

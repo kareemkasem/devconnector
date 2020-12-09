@@ -3,6 +3,7 @@ import {
   AlertType,
   ClientErrorType,
   GithubRepoType,
+  PostType,
   ProfileType,
   UserType,
 } from "../../global.types";
@@ -29,6 +30,8 @@ export const DELETE_ACCOUT = "DELETE_ACCOUNT";
 export const GET_GITHUB_REPOS = "GET_GITHUB_REPOS";
 export const GET_POSTS = "GET_POSTS";
 export const POST_ERROR = "POST_ERROR";
+export const UPDATE_LIKES = "UPDATE_LIKES";
+export const DELETE_POST = "DELETE_POST";
 
 export interface SetAlertType {
   type: typeof SET_ALERT;
@@ -109,11 +112,22 @@ export interface GetGithubReposType {
 }
 export interface GetPostsType {
   type: typeof GET_POSTS;
-  payload: string[];
+  payload: PostType[];
 }
 export interface PostErrorType {
   type: typeof POST_ERROR;
   payload: ClientErrorType;
+}
+export interface UpdateLikesType {
+  type: typeof UPDATE_LIKES;
+  payload: {
+    likes: string[];
+    postId: string;
+  };
+}
+export interface DeletePostType {
+  type: typeof DELETE_POST;
+  payload: string;
 }
 
 export type AppActionTypes =
@@ -139,4 +153,6 @@ export type AppActionTypes =
   | DeleteAccountType
   | GetGithubReposType
   | GetPostsType
-  | PostErrorType;
+  | PostErrorType
+  | UpdateLikesType
+  | DeletePostType;

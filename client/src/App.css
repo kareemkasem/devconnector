@@ -487,6 +487,9 @@ button {
   grid-template-columns: 1fr 4fr;
   grid-gap: 2rem;
   align-items: center;
+  background: rgb(242, 244, 252);
+  border: 1px solid rgb(226, 231, 252);
+  border-radius: 10px;
 }
 
 .post > div:first-child {
