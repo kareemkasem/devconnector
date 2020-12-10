@@ -12,6 +12,7 @@ function PostItem({
   post: { _id, content, username, avatar, user, likes, comments, date },
   likeOrUnlike,
   deletePost,
+  showControls = true,
 }: PostProps) {
   return (
     <div className="post p-1 my-1">
@@ -26,30 +27,33 @@ function PostItem({
         <p className="post-date">
           Posted on {moment(date).format("DD MM YYYY")}
         </p>
-
-        <button
-          onClick={() => likeOrUnlike(_id!)}
-          type="button"
-          className="btn btn-light"
-        >
-          <i className="fas fa-thumbs-up" />{" "}
-          <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
-        </button>
-        <Link to={`/posts/${_id}`} className="btn btn-primary">
-          Discussion{" "}
-          {comments.length > 0 && (
-            <span className="comment-count">{comments.length}</span>
-          )}
-        </Link>
-        {!authLoading && user === currentUser.id && (
-          <button
-            onClick={() => deletePost(_id!)}
-            type="button"
-            className="btn btn-danger"
-          >
-            <i className="fas fa-times" />
-          </button>
-        )}
+        {showControls ? (
+          <>
+            <button
+              onClick={() => likeOrUnlike(_id!)}
+              type="button"
+              className="btn btn-light"
+            >
+              <i className="fas fa-thumbs-up" />{" "}
+              <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
+            </button>
+            <Link to={`/posts/${_id}`} className="btn btn-primary">
+              Discussion{" "}
+              {comments.length > 0 && (
+                <span className="comment-count">{comments.length}</span>
+              )}
+            </Link>
+            {!authLoading && user === currentUser.id && (
+              <button
+                onClick={() => deletePost(_id!)}
+                type="button"
+                className="btn btn-danger"
+              >
+                <i className="fas fa-times" />
+              </button>
+            )}
+          </>
+        ) : null}
       </div>
     </div>
   );
@@ -68,4 +72,5 @@ interface PostProps {
   post: PostType;
   likeOrUnlike: (postId: string) => void;
   deletePost: (postId: string) => void;
+  showControls?: boolean;
 }

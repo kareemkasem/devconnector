@@ -11,6 +11,7 @@ import CreateProfile from "./components/profile-forms/create-profile";
 import Profiles from "./components/profiles/profiles";
 import profile from "./components/profile/profile";
 import Posts from "./components/posts/posts";
+import Post from "./components/post/post";
 
 function Routes() {
   return (
@@ -47,6 +48,7 @@ function Routes() {
               element={<CreateProfile />}
             />
             <ProtectedRoute path="/posts" exact element={<Posts />} />
+            <ProtectedRoute path="/posts/:postId" exact element={<Post />} />
           </section>
         </>
       </Switch>

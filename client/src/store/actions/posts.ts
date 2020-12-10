@@ -14,6 +14,8 @@ import {
   SetAlertType,
   AddPostType,
   ADD_POST,
+  GetPostType,
+  GET_POST,
 } from "./action.types";
 import { setAlert } from "./alerts";
 
@@ -23,6 +25,23 @@ export const getPosts = () => async (
   try {
     const response = await axiosInstance.get<PostType[]>("/api/post/all");
     dispatch({ type: GET_POSTS, payload: response.data });
+  } catch (error) {
+    dispatch({
+      type: POST_ERROR,
+      payload: {
+        status: error.response.status,
+        statusText: error.response.statusText,
+      },
+    });
+  }
+};
+
+export const getPost = (postId: string) => async (
+  dispatch: Dispatch<GetPostType | PostErrorType>
+) => {
+  try {
+    const response = await axiosInstance.get<PostType>(`/api/post/${postId}`);
+    dispatch({ type: GET_POST, payload: response.data });
   } catch (error) {
     dispatch({
       type: POST_ERROR,

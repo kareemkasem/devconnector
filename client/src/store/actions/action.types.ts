@@ -29,6 +29,8 @@ export const UPDATE_PROFILE_FAILED = "UPDATE_PROFILE_FAILED";
 export const DELETE_ACCOUT = "DELETE_ACCOUNT";
 export const GET_GITHUB_REPOS = "GET_GITHUB_REPOS";
 export const GET_POSTS = "GET_POSTS";
+export const GET_POST = "GET_POST";
+export const CLEAR_POST = "CLEAR_POST";
 export const POST_ERROR = "POST_ERROR";
 export const UPDATE_LIKES = "UPDATE_LIKES";
 export const DELETE_POST = "DELETE_POST";
@@ -115,6 +117,13 @@ export interface GetPostsType {
   type: typeof GET_POSTS;
   payload: PostType[];
 }
+export interface GetPostType {
+  type: typeof GET_POST;
+  payload: PostType;
+}
+export interface ClearPostType {
+  type: typeof CLEAR_POST;
+}
 export interface PostErrorType {
   type: typeof POST_ERROR;
   payload: ClientErrorType;
@@ -158,6 +167,8 @@ export type AppActionTypes =
   | DeleteAccountType
   | GetGithubReposType
   | GetPostsType
+  | GetPostType
+  | ClearPostType
   | PostErrorType
   | UpdateLikesType
   | DeletePostType
