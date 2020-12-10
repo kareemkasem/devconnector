@@ -7,6 +7,7 @@ import { MoonLoader } from "react-spinners";
 import store, { AppState } from "../../store/configureStore";
 import { PostType } from "../../global.types";
 import { CLEAR_POST } from "../../store/actions/action.types";
+import CommentForm from "./comment-form";
 
 function Post({ getPost, post, postLoading, match }: PostProps) {
   useEffect(() => {
@@ -26,6 +27,7 @@ function Post({ getPost, post, postLoading, match }: PostProps) {
         Back To Posts
       </Link>
       <PostItem post={post} showControls={false} />
+      <CommentForm postId={post._id!} />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { CallHistoryMethodAction } from "connected-react-router";
 import {
   AlertType,
   ClientErrorType,
+  CommentType,
   GithubRepoType,
   PostType,
   ProfileType,
@@ -35,6 +36,8 @@ export const POST_ERROR = "POST_ERROR";
 export const UPDATE_LIKES = "UPDATE_LIKES";
 export const DELETE_POST = "DELETE_POST";
 export const ADD_POST = "ADD_POST";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 export interface SetAlertType {
   type: typeof SET_ALERT;
@@ -143,6 +146,14 @@ export interface AddPostType {
   type: typeof ADD_POST;
   payload: PostType;
 }
+export interface AddCommentType {
+  type: typeof ADD_COMMENT;
+  payload: CommentType;
+}
+export interface DeleteCommentType {
+  type: typeof DELETE_COMMENT;
+  payload: string; //commentId
+}
 
 export type AppActionTypes =
   | CallHistoryMethodAction //for router bindings
@@ -172,4 +183,6 @@ export type AppActionTypes =
   | PostErrorType
   | UpdateLikesType
   | DeletePostType
-  | AddPostType;
+  | AddPostType
+  | AddCommentType
+  | DeleteCommentType;

@@ -186,6 +186,7 @@ export interface GithubRepoType {
 }
 
 export interface CommentType {
+  _id?: string;
   user: string;
   avatar: string;
   username: string;

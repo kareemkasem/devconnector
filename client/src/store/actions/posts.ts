@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import axiosInstance from "../../axios.config";
-import { PostType } from "../../global.types";
+import { CommentType, PostType } from "../../global.types";
 import alertError from "../../utils/redux-alert-errors";
 import {
   GET_POSTS,
@@ -16,6 +16,10 @@ import {
   ADD_POST,
   GetPostType,
   GET_POST,
+  AddCommentType,
+  ADD_COMMENT,
+  DeleteCommentType,
+  DELETE_COMMENT,
 } from "./action.types";
 import { setAlert } from "./alerts";
 
@@ -101,6 +105,33 @@ export const addPost = (post: PostType) => async (
     );
 
     dispatch({ type: ADD_POST, payload: response.data });
+  } catch (error) {
+    alertError(error);
+  }
+};
+
+export const addComment = (comment: CommentType, postId: string) => async (
+  dispatch: Dispatch<AddCommentType | SetAlertType>
+) => {
+  try {
+    const response = await axiosInstance.put<CommentType>(
+      `api/post/comment/${postId}`,
+      comment
+    );
+
+    dispatch({ type: ADD_COMMENT, payload: response.data });
+  } catch (error) {
+    alertError(error);
+  }
+};
+
+export const deleteComment = (commentId: string, postId: string) => async (
+  dispatch: Dispatch<DeleteCommentType | SetAlertType>
+) => {
+  try {
+    await axiosInstance.delete(`/api/post/comment/${postId}/${commentId}`);
+
+    dispatch({ type: DELETE_COMMENT, payload: commentId });
   } catch (error) {
     alertError(error);
   }
