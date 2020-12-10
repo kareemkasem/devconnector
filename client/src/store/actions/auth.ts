@@ -23,6 +23,7 @@ import {
 import { LoginParamsType, SignupParams, UserType } from "../../global.types";
 import alertErrors from "../../utils/redux-alert-errors";
 import axiosInstance from "../../axios.config";
+import { CallHistoryMethodAction, push } from "connected-react-router";
 
 export const loadUser = () => async (
   dispatch: Dispatch<UserLoadedType | AuthErrorType>
@@ -100,12 +101,13 @@ export const login = ({ email, password }: LoginParamsType) => async (
 };
 
 export const logout = () => (
-  dispatch: Dispatch<LogoutType | ClearProfileType>
+  dispatch: Dispatch<LogoutType | ClearProfileType | CallHistoryMethodAction>
 ) => {
   localStorage.removeItem("token");
   dispatch({
     type: CLEAR_PROFILE,
   } as ClearProfileType);
+  dispatch(push("/"));
   dispatch({
     type: LOGOUT,
   } as LogoutType);

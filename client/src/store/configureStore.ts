@@ -4,7 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { AppActionTypes } from "./actions/action.types";
 
 import { createBrowserHistory } from "history";
-import { routerMiddleware } from "connected-react-router";
+import { connectRouter, routerMiddleware } from "connected-react-router";
 
 import alertsReducer from "./reducers/alerts";
 import authReducer from "./reducers/auth";
@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   profile: profileReducer,
   posts: postsReducer,
+  router: connectRouter(history),
 });
 
 const store: Store<AppState, any> = createStore(
