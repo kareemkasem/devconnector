@@ -28,6 +28,9 @@ function DashBoard({ getCurrentUserProfile, auth, profile }: DashBoardProps) {
             <p className="lead">
               <i className="fas fa-user" /> Welcome {user && user.name}
             </p>
+            <Link to={`/profile/${user!._id}`} className="btn btn-secondary">
+              View Profile
+            </Link>
             <Link to="/create-profile" className="btn btn-secondary">
               Edit Profile
             </Link>
@@ -40,6 +43,19 @@ function DashBoard({ getCurrentUserProfile, auth, profile }: DashBoardProps) {
             </Link>
           </div>
         )}
+        <div
+          style={{
+            padding: "10px",
+            fontSize: "1.5rem",
+            margin: "20px 100px",
+            background: "#FDFFC0",
+            border: "3px solid #FDF0C0",
+            borderRadius: "15px",
+            textAlign: "center",
+          }}
+        >
+          under construction notifications zone 😃
+        </div>
       </div>
     );
   }
