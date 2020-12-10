@@ -20,17 +20,29 @@ const ProfileTop = (props: { profile: ProfileType }) => {
           </a>
         )}
         {social && social.twitter && (
-          <a href={social.twitter} target="_blank" rel="noopener noreferrer">
+          <a
+            href={`https://www.twitter.com/${social.twitter}`}
+            target="_blank"
+            rel="noreferrer"
+          >
             <i className="fab fa-twitter fa-2x" />
           </a>
         )}
         {social && social.linkedIn && (
-          <a href={social.linkedIn} target="_blank" rel="noopener noreferrer">
+          <a
+            href={`https://www.linkedin.com/in/${social.linkedIn}`}
+            target="_blank"
+            rel="noreferrer"
+          >
             <i className="fab fa-linkedin fa-2x" />
           </a>
         )}
         {social && social.youtube && (
-          <a href={social.youtube} target="_blank" rel="noopener noreferrer">
+          <a
+            href={`https://www.youtube.com/user/${social.youtube}`}
+            target="_blank"
+            rel="noreferrer"
+          >
             <i className="fab fa-youtube fa-2x" />
           </a>
         )}
