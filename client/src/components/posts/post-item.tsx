@@ -25,7 +25,7 @@ function PostItem({
       <div>
         <p className="my-1">{content}</p>
         <p className="post-date">
-          Posted on {moment(date).format("DD MM YYYY")}
+          Posted on {moment(date).format("MMM DD YYYY")}
         </p>
         {showControls ? (
           <>

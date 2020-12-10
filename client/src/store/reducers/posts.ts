@@ -60,7 +60,7 @@ const postsReducer = (
         loading: false,
         post: {
           ...state.post!,
-          comments: [...state.post!.comments, action.payload],
+          comments: action.payload,
         },
       };
 

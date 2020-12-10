@@ -4,7 +4,7 @@ import { CommentType, UserType } from "../../global.types";
 import { addComment } from "../../store/actions/posts";
 import { AppState } from "../../store/configureStore";
 
-const CommentForm = ({ postId, addComment, currentUser }: CommentFormProps) => {
+function CommentForm({ postId, addComment, currentUser }: CommentFormProps) {
   const [content, setContent] = useState<string>("");
 
   const { id, avatar, name } = currentUser;
@@ -42,7 +42,7 @@ const CommentForm = ({ postId, addComment, currentUser }: CommentFormProps) => {
       </form>
     </div>
   );
-};
+}
 
 const mapStateToProps = (state: AppState) => ({
   currentUser: state.auth.user!,

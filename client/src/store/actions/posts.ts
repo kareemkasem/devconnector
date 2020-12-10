@@ -114,7 +114,7 @@ export const addComment = (comment: CommentType, postId: string) => async (
   dispatch: Dispatch<AddCommentType | SetAlertType>
 ) => {
   try {
-    const response = await axiosInstance.put<CommentType>(
+    const response = await axiosInstance.put<CommentType[]>(
       `api/post/comment/${postId}`,
       comment
     );
@@ -129,7 +129,9 @@ export const deleteComment = (commentId: string, postId: string) => async (
   dispatch: Dispatch<DeleteCommentType | SetAlertType>
 ) => {
   try {
-    await axiosInstance.delete(`/api/post/comment/${postId}/${commentId}`);
+    await axiosInstance.delete(
+      `/api/post/deleteComment/${postId}/${commentId}`
+    );
 
     dispatch({ type: DELETE_COMMENT, payload: commentId });
   } catch (error) {

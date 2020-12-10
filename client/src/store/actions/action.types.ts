@@ -148,7 +148,7 @@ export interface AddPostType {
 }
 export interface AddCommentType {
   type: typeof ADD_COMMENT;
-  payload: CommentType;
+  payload: CommentType[];
 }
 export interface DeleteCommentType {
   type: typeof DELETE_COMMENT;
