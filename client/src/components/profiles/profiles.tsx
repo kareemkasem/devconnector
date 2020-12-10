@@ -24,7 +24,7 @@ function Profiles({ getAllProfiles, profiles, loading }: ProfilesProps) {
       </p>
       {loading || profiles.length === 0 ? (
         <div className="loader-page">
-          <MoonLoader loading={true} size={100} color="#00A3B8" />;
+          <MoonLoader loading={true} size={100} color="#00A3B8" />
         </div>
       ) : (
         <div className="profiles">

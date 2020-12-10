@@ -17,7 +17,7 @@ function Posts({ getPosts, posts, postsLoading }: PostsProps) {
       <h1 className="large text-primary">Timeline</h1>
       {postsLoading ? (
         <div className="loader-page">
-          <MoonLoader loading={true} size={100} color="#00A3B8" />;
+          <MoonLoader loading={true} size={100} color="#00A3B8" />
         </div>
       ) : (
         <div className="posts">

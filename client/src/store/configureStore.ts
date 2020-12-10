@@ -35,10 +35,3 @@ const store: Store<AppState, any> = createStore(
 
 export default store;
 export type AppState = ReturnType<typeof rootReducer>;
-
-/*
-                            ******* router redux bindings *******
-  in this setup I'm only using the middleware which means i'll only be able to use
-  '@@router/CALL_HISTORY_METHOD' action type on the updateLocation functions [push, go, replace, goBack, goForward].
-  you can have total control over routing if you configure the store itself to handle it as explained here https://github.com/supasate/connected-react-router
-*/
