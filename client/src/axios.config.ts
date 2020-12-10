@@ -1,23 +1,15 @@
 import Axios, { AxiosInstance } from "axios";
-export class AxiosConfig {
-  constructor() {
-    this.configureDefaults();
-  }
 
-  private token: string | null = localStorage.getItem("token");
+const instance: AxiosInstance = Axios.create({
+  baseURL: process.env.REACT_APP_BASEURL,
+});
 
-  public instance: AxiosInstance = Axios.create({
-    baseURL: process.env.REACT_APP_BASEURL,
-  });
+instance.defaults.headers.common["Content-Type"] = "application/json";
 
-  private configureDefaults() {
-    this.instance.defaults.headers.common["Content-Type"] = "application/json";
-    if (this.token)
-      this.instance.defaults.headers.common["x-auth-token"] = this.token;
-  }
-}
+instance.interceptors.request.use(req => {
+  const token: string | null = localStorage.getItem("token");
+  if (token) req.headers.common["x-auth-token"] = token;
+  return req;
+});
 
-const axiosInstance = () => {
-  return new AxiosConfig().instance;
-};
-export default axiosInstance;
+export default instance;

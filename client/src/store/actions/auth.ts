@@ -1,5 +1,4 @@
 import { Dispatch } from "redux";
-import { AxiosResponse } from "axios";
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
@@ -29,9 +28,7 @@ export const loadUser = () => async (
   dispatch: Dispatch<UserLoadedType | AuthErrorType>
 ) => {
   try {
-    const response = await axiosInstance().get<null, AxiosResponse<UserType>>(
-      "/api/auth"
-    );
+    const response = await axiosInstance.get<UserType>("/api/auth");
     const user = response.data;
 
     dispatch({
@@ -52,10 +49,10 @@ export const signup = ({ name, email, password }: SignupParams) => async (
   const data = { name, email, password };
 
   try {
-    const response = await axiosInstance().post<
-      SignupParams,
-      AxiosResponse<{ token: string }>
-    >("/api/auth/signup", data);
+    const response = await axiosInstance.post<{ token: string }>(
+      "/api/auth/signup",
+      data
+    );
 
     dispatch({
       type: SIGNUP_SUCCESS,
@@ -81,10 +78,10 @@ export const login = ({ email, password }: LoginParamsType) => async (
   const data = { email, password };
 
   try {
-    const response = await axiosInstance().post<
-      SignupParams,
-      AxiosResponse<{ token: string }>
-    >("/api/auth/login", data);
+    const response = await axiosInstance.post<{ token: string }>(
+      "/api/auth/login",
+      data
+    );
 
     dispatch({
       type: LOGIN_SUCCESS,

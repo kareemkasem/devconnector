@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { Dispatch } from "redux";
 import axiosInstance from "../../axios.config";
 import { PostType } from "../../global.types";
@@ -19,9 +18,7 @@ export const getPosts = () => async (
   dispatch: Dispatch<GetPostsType | PostErrorType>
 ) => {
   try {
-    const response = await axiosInstance().get<any, AxiosResponse<PostType[]>>(
-      "/api/post/all"
-    );
+    const response = await axiosInstance.get<PostType[]>("/api/post/all");
     dispatch({ type: GET_POSTS, payload: response.data });
   } catch (error) {
     dispatch({
@@ -38,7 +35,7 @@ export const likeOrUnlike = (postId: string) => async (
   dispatch: Dispatch<UpdateLikesType | PostErrorType>
 ) => {
   try {
-    const response = await axiosInstance().put<any, AxiosResponse<string[]>>(
+    const response = await axiosInstance.put<string[]>(
       `/api/post/like/${postId}`
     );
     dispatch({ type: UPDATE_LIKES, payload: { postId, likes: response.data } });
@@ -57,7 +54,7 @@ export const deletePost = (postId: string) => async (
   dispatch: Dispatch<DeletePostType | PostErrorType | SetAlertType>
 ) => {
   try {
-    await axiosInstance().get(`/api/post/delete/${postId}`);
+    await axiosInstance.get(`/api/post/delete/${postId}`);
 
     dispatch(setAlert("post deleted successfully", "success"));
     dispatch({ type: DELETE_POST, payload: postId });
