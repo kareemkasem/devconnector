@@ -1,5 +1,6 @@
 import { ClientErrorType, PostType } from "../../global.types";
 import {
+  ADD_POST,
   AppActionTypes,
   DELETE_POST,
   GET_POSTS,
@@ -35,6 +36,13 @@ const postsReducer = (
         post => post._id !== action.payload
       );
       return { ...state, loading: false, posts: postsAfterDelete };
+
+    case ADD_POST:
+      return {
+        ...state,
+        loading: false,
+        posts: [action.payload, ...state.posts],
+      };
 
     case POST_ERROR:
       return { ...state, loading: false, error: action.payload };

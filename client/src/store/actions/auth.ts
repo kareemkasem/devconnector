@@ -63,7 +63,7 @@ export const signup = ({ name, email, password }: SignupParams) => async (
     // @ts-ignore
     dispatch(loadUser());
   } catch (error) {
-    alertErrors(error, dispatch);
+    alertErrors(error);
 
     dispatch({
       type: SIGNUP_FAIL,
@@ -92,7 +92,7 @@ export const login = ({ email, password }: LoginParamsType) => async (
     // @ts-ignore
     dispatch(loadUser());
   } catch (error) {
-    alertErrors(error, dispatch);
+    alertErrors(error);
 
     dispatch({
       type: LOGIN_FAIL,

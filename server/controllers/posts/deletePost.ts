@@ -1,3 +1,4 @@
+import { Document } from "mongoose";
 import Post from "../../models/post";
 
 export default async (req, res) => {
@@ -5,15 +6,14 @@ export default async (req, res) => {
   try {
     const postToDelete: any = await Post.findById(postId);
     if (!postToDelete) {
-      return res
-        .status(404)
-        .json({
-          errors: [{ msg: "post doesn't exist or no longer available." }],
-        });
+      return res.status(404).json({
+        errors: [{ msg: "post doesn't exist or no longer available." }],
+      });
     }
     if (postToDelete.user.toString() != req.user.id) {
       return res.status(401).json({ errors: [{ msg: "unauthorized" }] });
     }
+    await postToDelete.deleteOne();
     res.status(200).json({ msg: "deleted successfully" });
   } catch (error) {
     if (error.kind == "ObjectId") {

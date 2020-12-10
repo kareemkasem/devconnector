@@ -28,7 +28,7 @@ function PostItem({
         </p>
 
         <button
-          onClick={() => likeOrUnlike(_id)}
+          onClick={() => likeOrUnlike(_id!)}
           type="button"
           className="btn btn-light"
         >
@@ -41,9 +41,9 @@ function PostItem({
             <span className="comment-count">{comments.length}</span>
           )}
         </Link>
-        {!authLoading && user === currentUser._id && (
+        {!authLoading && user === currentUser.id && (
           <button
-            onClick={() => deletePost(_id)}
+            onClick={() => deletePost(_id!)}
             type="button"
             className="btn btn-danger"
           >

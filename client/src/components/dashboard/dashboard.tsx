@@ -28,7 +28,7 @@ function DashBoard({ getCurrentUserProfile, auth, profile }: DashBoardProps) {
             <p className="lead">
               <i className="fas fa-user" /> Welcome {user && user.name}
             </p>
-            <Link to={`/profile/${user!._id}`} className="btn btn-secondary">
+            <Link to={`/profile/${user!.id}`} className="btn btn-secondary">
               View Profile
             </Link>
             <Link to="/create-profile" className="btn btn-secondary">

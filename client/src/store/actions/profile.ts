@@ -95,7 +95,7 @@ export const createOrUpdateProfile = (data: ProfileType) => async (
       payload: profileData,
     });
   } catch (error) {
-    alertError(error, dispatch);
+    alertError(error);
     dispatch({
       type: UPDATE_PROFILE_FAILED,
     });
@@ -109,7 +109,7 @@ export const deleteAccount = () => async (
     await axiosInstance.delete("/api/user/delete");
     dispatch({ type: DELETE_ACCOUT });
   } catch (error) {
-    alertError(error, dispatch);
+    alertError(error);
   }
 };
 

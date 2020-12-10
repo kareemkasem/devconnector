@@ -6,6 +6,7 @@ import { AppState } from "../../store/configureStore";
 import { PostType } from "../../global.types";
 import { MoonLoader } from "react-spinners";
 import {} from "../../store/actions/action.types";
+import PostForm from "./post-form";
 
 function Posts({ getPosts, posts, postsLoading }: PostsProps) {
   useEffect(() => {
@@ -15,6 +16,7 @@ function Posts({ getPosts, posts, postsLoading }: PostsProps) {
   return (
     <div>
       <h1 className="large text-primary">Timeline</h1>
+      <PostForm />
       {postsLoading ? (
         <div className="loader-page">
           <MoonLoader loading={true} size={100} color="#00A3B8" />

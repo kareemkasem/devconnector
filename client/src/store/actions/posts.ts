@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 import axiosInstance from "../../axios.config";
 import { PostType } from "../../global.types";
+import alertError from "../../utils/redux-alert-errors";
 import {
   GET_POSTS,
   POST_ERROR,
@@ -11,6 +12,8 @@ import {
   DeletePostType,
   DELETE_POST,
   SetAlertType,
+  AddPostType,
+  ADD_POST,
 } from "./action.types";
 import { setAlert } from "./alerts";
 
@@ -54,7 +57,7 @@ export const deletePost = (postId: string) => async (
   dispatch: Dispatch<DeletePostType | PostErrorType | SetAlertType>
 ) => {
   try {
-    await axiosInstance.get(`/api/post/delete/${postId}`);
+    await axiosInstance.delete(`/api/post/delete/${postId}`);
 
     dispatch(setAlert("post deleted successfully", "success"));
     dispatch({ type: DELETE_POST, payload: postId });
@@ -66,5 +69,20 @@ export const deletePost = (postId: string) => async (
         statusText: error.response.statusText,
       },
     });
+  }
+};
+
+export const addPost = (post: PostType) => async (
+  dispatch: Dispatch<AddPostType | SetAlertType>
+) => {
+  try {
+    const response = await axiosInstance.post<PostType>(
+      "/api/post/create",
+      post
+    );
+
+    dispatch({ type: ADD_POST, payload: response.data });
+  } catch (error) {
+    alertError(error);
   }
 };

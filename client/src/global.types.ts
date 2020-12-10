@@ -5,12 +5,11 @@ export interface AlertType {
 }
 
 export interface UserType {
-  _id: string;
+  id: string;
   name: string;
   email: string;
   avatar: string;
   date: Date;
-  id: string;
 }
 
 export interface ServerErrorType {
@@ -35,7 +34,7 @@ export interface SignupParams extends LoginParamsType {
 }
 
 export interface EducationType {
-  _id: string;
+  _id?: string;
   school: string;
   degree: string;
   fieldOfStudy: string;
@@ -46,7 +45,7 @@ export interface EducationType {
 }
 
 export interface ExperienceType {
-  _id: string;
+  _id?: string;
   jobTitle: string;
   company: string;
   location: string;
@@ -195,7 +194,7 @@ export interface CommentType {
 }
 
 export interface PostType {
-  _id: string;
+  _id?: string;
   user: string;
   username: string;
   avatar: string;

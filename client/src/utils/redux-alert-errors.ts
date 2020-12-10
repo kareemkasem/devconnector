@@ -1,13 +1,13 @@
 import { SET_ALERT } from "../store/actions/action.types";
 import { ServerErrorType } from "../global.types";
 import { v4 as uuid } from "uuid";
-import { Dispatch } from "redux";
+import store from "../store/configureStore";
 
-const alertError = (error: any, dispatch: Dispatch) => {
+const alertError = (error: any) => {
   const errorResponse: { errors: ServerErrorType[] } = error?.response?.data;
 
   errorResponse?.errors?.forEach((err: ServerErrorType) => {
-    dispatch({
+    store.dispatch({
       type: SET_ALERT,
       payload: {
         id: uuid(),
