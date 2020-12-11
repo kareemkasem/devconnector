@@ -1,22 +1,14 @@
 import axiosInstance from "../../axios.config";
 import {
   DeleteAccountType,
-  DELETE_ACCOUT,
   GetAllProfilesType,
-  GET_PROFILE,
-  PROFILE_ERROR,
   SetAlertType,
   UpdateProfileFailedType,
   UpdateProfileType,
-  UPDATE_PROFILE,
-  UPDATE_PROFILE_FAILED,
   GetProfileType,
   ProfileErrorType,
-  GET_ALL_PROFILES,
   GetProfileByIdType,
-  GET_PROFILE_BY_ID,
   GetGithubReposType,
-  GET_GITHUB_REPOS,
 } from "./action.types";
 import { Dispatch } from "redux";
 import { GithubRepoType, ProfileType } from "../../global.types";
@@ -28,12 +20,12 @@ export const getCurrentUserProfile = () => async (
   try {
     const response = await axiosInstance.get<ProfileType>("/api/profile/me");
     dispatch({
-      type: GET_PROFILE,
+      type: "GET_PROFILE",
       payload: response.data,
     } as GetProfileType);
   } catch (error) {
     dispatch({
-      type: PROFILE_ERROR,
+      type: "PROFILE_ERROR",
       payload: {
         status: error.response.status,
         statusText: error.response.statusText,
@@ -48,12 +40,12 @@ export const getAllProfiles = () => async (
   try {
     const response = await axiosInstance.get<ProfileType[]>("/api/profile/all");
     dispatch({
-      type: GET_ALL_PROFILES,
+      type: "GET_ALL_PROFILES",
       payload: response.data,
     });
   } catch (error) {
     dispatch({
-      type: PROFILE_ERROR,
+      type: "PROFILE_ERROR",
       payload: {
         status: error.response.status,
         statusText: error.response.statusText,
@@ -70,12 +62,12 @@ export const getProfileById = (userId: string) => async (
       `/api/profile/${userId}`
     );
     dispatch({
-      type: GET_PROFILE_BY_ID,
+      type: "GET_PROFILE_BY_ID",
       payload: response.data,
     });
   } catch (error) {
     dispatch({
-      type: PROFILE_ERROR,
+      type: "PROFILE_ERROR",
       payload: {
         status: error.response.status,
         statusText: error.response.statusText,
@@ -91,13 +83,13 @@ export const createOrUpdateProfile = (data: ProfileType) => async (
     const result = await axiosInstance.post<ProfileType>("/api/profile", data);
     const { user, ...profileData } = result.data;
     dispatch({
-      type: UPDATE_PROFILE,
+      type: "UPDATE_PROFILE",
       payload: profileData,
     });
   } catch (error) {
     alertError(error);
     dispatch({
-      type: UPDATE_PROFILE_FAILED,
+      type: "UPDATE_PROFILE_FAILED",
     });
   }
 };
@@ -107,7 +99,7 @@ export const deleteAccount = () => async (
 ) => {
   try {
     await axiosInstance.delete("/api/user/delete");
-    dispatch({ type: DELETE_ACCOUT });
+    dispatch({ type: "DELETE_ACCOUT" });
   } catch (error) {
     alertError(error);
   }
@@ -121,12 +113,12 @@ export const getGithubRepos = (githubUsername: string) => async (
       `/api/profile/github/${githubUsername}`
     );
     dispatch({
-      type: GET_GITHUB_REPOS,
+      type: "GET_GITHUB_REPOS",
       payload: response.data,
     });
   } catch (error) {
     dispatch({
-      type: PROFILE_ERROR,
+      type: "PROFILE_ERROR",
       payload: {
         status: error.response.status,
         statusText: error.response.statusText,

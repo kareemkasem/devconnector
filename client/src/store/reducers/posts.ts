@@ -1,16 +1,5 @@
 import { ClientErrorType, PostType } from "../../global.types";
-import {
-  ADD_COMMENT,
-  ADD_POST,
-  AppActionTypes,
-  CLEAR_POST,
-  DELETE_COMMENT,
-  DELETE_POST,
-  GET_POST,
-  GET_POSTS,
-  POST_ERROR,
-  UPDATE_LIKES,
-} from "../actions/action.types";
+import { AppActionTypes } from "../actions/action.types";
 
 const initialState: PostsState = {
   post: undefined,
@@ -24,13 +13,13 @@ const postsReducer = (
   action: AppActionTypes
 ): PostsState => {
   switch (action.type) {
-    case GET_POSTS:
+    case "GET_POSTS":
       return { ...state, loading: false, posts: action.payload };
 
-    case GET_POST:
+    case "GET_POST":
       return { ...state, loading: false, post: action.payload };
 
-    case UPDATE_LIKES:
+    case "UPDATE_LIKES":
       const postsAfterLike: PostType[] = state.posts.map(post =>
         post._id === action.payload.postId
           ? { ...post, likes: action.payload.likes }
@@ -38,23 +27,23 @@ const postsReducer = (
       );
       return { ...state, loading: false, posts: postsAfterLike };
 
-    case DELETE_POST:
+    case "DELETE_POST":
       const postsAfterDelete: PostType[] = state.posts.filter(
         post => post._id !== action.payload
       );
       return { ...state, loading: false, posts: postsAfterDelete };
 
-    case CLEAR_POST:
+    case "CLEAR_POST":
       return { ...state, loading: false, post: undefined };
 
-    case ADD_POST:
+    case "ADD_POST":
       return {
         ...state,
         loading: false,
         posts: [action.payload, ...state.posts],
       };
 
-    case ADD_COMMENT:
+    case "ADD_COMMENT":
       return {
         ...state,
         loading: false,
@@ -64,7 +53,7 @@ const postsReducer = (
         },
       };
 
-    case DELETE_COMMENT:
+    case "DELETE_COMMENT":
       return {
         ...state,
         loading: false,
@@ -76,7 +65,7 @@ const postsReducer = (
         },
       };
 
-    case POST_ERROR:
+    case "POST_ERROR":
       return { ...state, loading: false, error: action.payload };
 
     default:

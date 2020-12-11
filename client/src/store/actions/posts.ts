@@ -3,23 +3,15 @@ import axiosInstance from "../../axios.config";
 import { CommentType, PostType } from "../../global.types";
 import alertError from "../../utils/redux-alert-errors";
 import {
-  GET_POSTS,
-  POST_ERROR,
   GetPostsType,
   PostErrorType,
   UpdateLikesType,
-  UPDATE_LIKES,
   DeletePostType,
-  DELETE_POST,
   SetAlertType,
   AddPostType,
-  ADD_POST,
   GetPostType,
-  GET_POST,
   AddCommentType,
-  ADD_COMMENT,
   DeleteCommentType,
-  DELETE_COMMENT,
 } from "./action.types";
 import { setAlert } from "./alerts";
 
@@ -28,10 +20,10 @@ export const getPosts = () => async (
 ) => {
   try {
     const response = await axiosInstance.get<PostType[]>("/api/post/all");
-    dispatch({ type: GET_POSTS, payload: response.data });
+    dispatch({ type: "GET_POSTS", payload: response.data });
   } catch (error) {
     dispatch({
-      type: POST_ERROR,
+      type: "POST_ERROR",
       payload: {
         status: error.response.status,
         statusText: error.response.statusText,
@@ -45,10 +37,10 @@ export const getPost = (postId: string) => async (
 ) => {
   try {
     const response = await axiosInstance.get<PostType>(`/api/post/${postId}`);
-    dispatch({ type: GET_POST, payload: response.data });
+    dispatch({ type: "GET_POST", payload: response.data });
   } catch (error) {
     dispatch({
-      type: POST_ERROR,
+      type: "POST_ERROR",
       payload: {
         status: error.response.status,
         statusText: error.response.statusText,
@@ -64,10 +56,13 @@ export const likeOrUnlike = (postId: string) => async (
     const response = await axiosInstance.put<string[]>(
       `/api/post/like/${postId}`
     );
-    dispatch({ type: UPDATE_LIKES, payload: { postId, likes: response.data } });
+    dispatch({
+      type: "UPDATE_LIKES",
+      payload: { postId, likes: response.data },
+    });
   } catch (error) {
     dispatch({
-      type: POST_ERROR,
+      type: "POST_ERROR",
       payload: {
         status: error.response.status,
         statusText: error.response.statusText,
@@ -83,10 +78,10 @@ export const deletePost = (postId: string) => async (
     await axiosInstance.delete(`/api/post/delete/${postId}`);
 
     dispatch(setAlert("post deleted successfully", "success"));
-    dispatch({ type: DELETE_POST, payload: postId });
+    dispatch({ type: "DELETE_POST", payload: postId });
   } catch (error) {
     dispatch({
-      type: POST_ERROR,
+      type: "POST_ERROR",
       payload: {
         status: error.response.status,
         statusText: error.response.statusText,
@@ -104,7 +99,7 @@ export const addPost = (post: PostType) => async (
       post
     );
 
-    dispatch({ type: ADD_POST, payload: response.data });
+    dispatch({ type: "ADD_POST", payload: response.data });
   } catch (error) {
     alertError(error);
   }
@@ -119,7 +114,7 @@ export const addComment = (comment: CommentType, postId: string) => async (
       comment
     );
 
-    dispatch({ type: ADD_COMMENT, payload: response.data });
+    dispatch({ type: "ADD_COMMENT", payload: response.data });
   } catch (error) {
     alertError(error);
   }
@@ -133,7 +128,7 @@ export const deleteComment = (commentId: string, postId: string) => async (
       `/api/post/deleteComment/${postId}/${commentId}`
     );
 
-    dispatch({ type: DELETE_COMMENT, payload: commentId });
+    dispatch({ type: "DELETE_COMMENT", payload: commentId });
   } catch (error) {
     alertError(error);
   }

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { getAllProfiles } from "../../store/actions/profile";
 import store, { AppState } from "../../store/configureStore";
 import { ProfileType } from "../../global.types";
-import { CLEAR_PROFILES } from "../../store/actions/action.types";
 import ProfileItem from "./profile-item";
 import { MoonLoader } from "react-spinners";
 
@@ -11,7 +10,7 @@ function Profiles({ getAllProfiles, profiles, loading }: ProfilesProps) {
   useEffect(() => {
     getAllProfiles();
     return () => {
-      store.dispatch({ type: CLEAR_PROFILES });
+      store.dispatch({ type: "CLEAR_PROFILES" });
     };
   }, [getAllProfiles]);
 

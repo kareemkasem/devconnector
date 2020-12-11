@@ -6,7 +6,6 @@ import store from "./store/configureStore";
 import Navbar from "./components/layouts/navbar";
 import Routes from "./routes";
 import { RouteChildrenProps, withRouter } from "react-router-dom";
-import { CLEAR_ALERTS } from "./store/actions/action.types";
 
 function App(props: RouteChildrenProps) {
   useEffect(() => {
@@ -14,7 +13,7 @@ function App(props: RouteChildrenProps) {
   }, []);
 
   useEffect(() => {
-    store.dispatch({ type: CLEAR_ALERTS });
+    store.dispatch({ type: "CLEAR_ALERTS" });
   }, [props.location]);
 
   return (

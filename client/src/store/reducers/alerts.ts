@@ -1,9 +1,4 @@
-import {
-  AppActionTypes,
-  REMOVE_ALERT,
-  SET_ALERT,
-  CLEAR_ALERTS,
-} from "../actions/action.types";
+import { AppActionTypes } from "../actions/action.types";
 import { AlertType } from "../../global.types";
 
 const initialState: AlertType[] = [];
@@ -13,11 +8,11 @@ const alertsReducer = (
   action: AppActionTypes
 ) => {
   switch (action.type) {
-    case SET_ALERT:
+    case "SET_ALERT":
       return [...state, action.payload];
-    case REMOVE_ALERT:
+    case "REMOVE_ALERT":
       return state.filter((alert: AlertType) => alert.id !== action.payload.id);
-    case CLEAR_ALERTS:
+    case "CLEAR_ALERTS":
       return [];
     default:
       return state;

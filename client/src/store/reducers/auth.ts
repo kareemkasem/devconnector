@@ -1,15 +1,4 @@
-import {
-  AppActionTypes,
-  SIGNUP_SUCCESS,
-  SIGNUP_FAIL,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  DELETE_ACCOUT,
-  USER_NOT_LOADED,
-} from "../actions/action.types";
+import { AppActionTypes } from "../actions/action.types";
 import { UserType } from "../../global.types";
 
 const initialState: AuthState = {
@@ -24,7 +13,7 @@ const authReducer = (
   action: AppActionTypes
 ): AuthState => {
   switch (action.type) {
-    case USER_LOADED:
+    case "USER_LOADED":
       return {
         ...state,
         isAuthenticated: true,
@@ -32,7 +21,7 @@ const authReducer = (
         user: action.payload,
       };
 
-    case USER_NOT_LOADED:
+    case "USER_NOT_LOADED":
       return {
         ...state,
         isAuthenticated: false,
@@ -40,8 +29,8 @@ const authReducer = (
         user: null,
       };
 
-    case SIGNUP_SUCCESS:
-    case LOGIN_SUCCESS:
+    case "SIGNUP_SUCCESS":
+    case "LOGIN_SUCCESS":
       const token = action.payload.token;
       localStorage.setItem("token", token);
       return {
@@ -50,11 +39,11 @@ const authReducer = (
         loading: false,
       };
 
-    case SIGNUP_FAIL:
-    case LOGIN_FAIL:
-    case AUTH_ERROR:
-    case LOGOUT:
-    case DELETE_ACCOUT:
+    case "SIGNUP_FAIL":
+    case "LOGIN_FAIL":
+    case "AUTH_ERROR":
+    case "LOGOUT":
+    case "DELETE_ACCOUT":
       localStorage.removeItem("token");
       return {
         user: null,

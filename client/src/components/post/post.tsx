@@ -6,7 +6,6 @@ import { getPost } from "../../store/actions/posts";
 import { MoonLoader } from "react-spinners";
 import store, { AppState } from "../../store/configureStore";
 import { PostType } from "../../global.types";
-import { CLEAR_POST } from "../../store/actions/action.types";
 import CommentForm from "./comment-form";
 import CommentItem from "./comment-item";
 import { v4 as uuid } from "uuid";
@@ -15,7 +14,7 @@ function Post({ getPost, post, postLoading, match }: PostProps) {
   useEffect(() => {
     getPost(match.params.postId);
     return () => {
-      store.dispatch({ type: CLEAR_POST });
+      store.dispatch({ type: "CLEAR_POST" });
     };
   }, [getPost, match.params.postId]);
 

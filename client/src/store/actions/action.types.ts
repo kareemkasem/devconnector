@@ -9,153 +9,122 @@ import {
   UserType,
 } from "../../global.types";
 
-export const SET_ALERT = "SET_ALERT";
-export const REMOVE_ALERT = "REMOVE_ALERT";
-export const CLEAR_ALERTS = "CLEAR_ALERTS";
-export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
-export const SIGNUP_FAIL = "SIGNUP_FAIL";
-export const USER_LOADED = "USER_LOADED";
-export const AUTH_ERROR = "AUTH_ERROR";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAIL = "LOGIN_FAIL";
-export const LOGOUT = "LOGOUT";
-export const GET_PROFILE = "GET_PROFILE";
-export const GET_PROFILE_BY_ID = "GET_PROFILE_BY_ID";
-export const GET_ALL_PROFILES = "GET_ALL_PROFILES";
-export const PROFILE_ERROR = "PROFILE_ERROR";
-export const CLEAR_PROFILE = "CLEAR_PROFILE";
-export const CLEAR_PROFILES = "CLEAR_PROFILES";
-export const UPDATE_PROFILE = "UPDATE_PROFILE";
-export const UPDATE_PROFILE_FAILED = "UPDATE_PROFILE_FAILED";
-export const DELETE_ACCOUT = "DELETE_ACCOUNT";
-export const GET_GITHUB_REPOS = "GET_GITHUB_REPOS";
-export const GET_POSTS = "GET_POSTS";
-export const GET_POST = "GET_POST";
-export const CLEAR_POST = "CLEAR_POST";
-export const POST_ERROR = "POST_ERROR";
-export const UPDATE_LIKES = "UPDATE_LIKES";
-export const DELETE_POST = "DELETE_POST";
-export const ADD_POST = "ADD_POST";
-export const ADD_COMMENT = "ADD_COMMENT";
-export const DELETE_COMMENT = "DELETE_COMMENT";
-export const USER_NOT_LOADED = "USER_NOT_LOADED";
-
 export interface SetAlertType {
-  type: typeof SET_ALERT;
+  type: "SET_ALERT";
   payload: AlertType;
 }
 export interface RemoveAlertType {
-  type: typeof REMOVE_ALERT;
+  type: "REMOVE_ALERT";
   payload: {
     id: string;
   };
 }
 export interface clearAlertsType {
-  type: typeof CLEAR_ALERTS;
+  type: "CLEAR_ALERTS";
 }
 export interface SignupSuccessType {
-  type: typeof SIGNUP_SUCCESS;
+  type: "SIGNUP_SUCCESS";
   payload: {
     token: string;
   };
 }
 export interface SignupFailType {
-  type: typeof SIGNUP_FAIL;
+  type: "SIGNUP_FAIL";
 }
 export interface UserLoadedType {
-  type: typeof USER_LOADED;
+  type: "USER_LOADED";
   payload: UserType;
 }
 export interface UserNotLoadedType {
-  type: typeof USER_NOT_LOADED;
+  type: "USER_NOT_LOADED";
 }
 export interface AuthErrorType {
-  type: typeof AUTH_ERROR;
+  type: "AUTH_ERROR";
 }
 export interface LoginSuccessType {
-  type: typeof LOGIN_SUCCESS;
+  type: "LOGIN_SUCCESS";
   payload: {
     token: string;
   };
 }
 export interface LoginFailType {
-  type: typeof LOGIN_FAIL;
+  type: "LOGIN_FAIL";
 }
 export interface LogoutType {
-  type: typeof LOGOUT;
+  type: "LOGOUT";
 }
 export interface GetProfileType {
-  type: typeof GET_PROFILE;
+  type: "GET_PROFILE";
   payload: ProfileType;
 }
 export interface GetProfileByIdType {
-  type: typeof GET_PROFILE_BY_ID;
+  type: "GET_PROFILE_BY_ID";
   payload: ProfileType;
 }
 export interface GetAllProfilesType {
-  type: typeof GET_ALL_PROFILES;
+  type: "GET_ALL_PROFILES";
   payload: ProfileType[];
 }
 export interface ProfileErrorType {
-  type: typeof PROFILE_ERROR;
+  type: "PROFILE_ERROR";
   payload: ClientErrorType;
 }
 export interface ClearProfileType {
-  type: typeof CLEAR_PROFILE;
+  type: "CLEAR_PROFILE";
 }
 export interface ClearProfilesType {
-  type: typeof CLEAR_PROFILES;
+  type: "CLEAR_PROFILES";
 }
 export interface UpdateProfileType {
-  type: typeof UPDATE_PROFILE;
+  type: "UPDATE_PROFILE";
   payload: ProfileType;
 }
 export interface UpdateProfileFailedType {
-  type: typeof UPDATE_PROFILE_FAILED;
+  type: "UPDATE_PROFILE_FAILED";
 }
 export interface DeleteAccountType {
-  type: typeof DELETE_ACCOUT;
+  type: "DELETE_ACCOUT";
 }
 export interface GetGithubReposType {
-  type: typeof GET_GITHUB_REPOS;
+  type: "GET_GITHUB_REPOS";
   payload: GithubRepoType[];
 }
 export interface GetPostsType {
-  type: typeof GET_POSTS;
+  type: "GET_POSTS";
   payload: PostType[];
 }
 export interface GetPostType {
-  type: typeof GET_POST;
+  type: "GET_POST";
   payload: PostType;
 }
 export interface ClearPostType {
-  type: typeof CLEAR_POST;
+  type: "CLEAR_POST";
 }
 export interface PostErrorType {
-  type: typeof POST_ERROR;
+  type: "POST_ERROR";
   payload: ClientErrorType;
 }
 export interface UpdateLikesType {
-  type: typeof UPDATE_LIKES;
+  type: "UPDATE_LIKES";
   payload: {
     likes: string[];
     postId: string;
   };
 }
 export interface DeletePostType {
-  type: typeof DELETE_POST;
+  type: "DELETE_POST";
   payload: string;
 }
 export interface AddPostType {
-  type: typeof ADD_POST;
+  type: "ADD_POST";
   payload: PostType;
 }
 export interface AddCommentType {
-  type: typeof ADD_COMMENT;
+  type: "ADD_COMMENT";
   payload: CommentType[];
 }
 export interface DeleteCommentType {
-  type: typeof DELETE_COMMENT;
+  type: "DELETE_COMMENT";
   payload: string; //commentId
 }
 
