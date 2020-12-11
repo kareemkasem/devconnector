@@ -13,6 +13,8 @@ import {
   LOGOUT,
   ClearProfileType,
   CLEAR_PROFILE,
+  UserNotLoadedType,
+  USER_NOT_LOADED,
 } from "./action.types";
 import {
   SignupFailType,
@@ -26,8 +28,10 @@ import axiosInstance from "../../axios.config";
 import { CallHistoryMethodAction, push } from "connected-react-router";
 
 export const loadUser = () => async (
-  dispatch: Dispatch<UserLoadedType | AuthErrorType>
+  dispatch: Dispatch<UserLoadedType | AuthErrorType | UserNotLoadedType>
 ) => {
+  const token = localStorage.getItem("token");
+  if (!token) return dispatch({ type: USER_NOT_LOADED });
   try {
     const response = await axiosInstance.get<UserType>("/api/auth");
     const user = response.data;

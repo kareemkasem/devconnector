@@ -38,6 +38,7 @@ export const DELETE_POST = "DELETE_POST";
 export const ADD_POST = "ADD_POST";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+export const USER_NOT_LOADED = "USER_NOT_LOADED";
 
 export interface SetAlertType {
   type: typeof SET_ALERT;
@@ -64,6 +65,9 @@ export interface SignupFailType {
 export interface UserLoadedType {
   type: typeof USER_LOADED;
   payload: UserType;
+}
+export interface UserNotLoadedType {
+  type: typeof USER_NOT_LOADED;
 }
 export interface AuthErrorType {
   type: typeof AUTH_ERROR;
@@ -163,6 +167,7 @@ export type AppActionTypes =
   | SignupSuccessType
   | SignupFailType
   | UserLoadedType
+  | UserNotLoadedType
   | AuthErrorType
   | LoginSuccessType
   | LoginFailType

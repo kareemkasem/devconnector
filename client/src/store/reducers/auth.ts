@@ -8,6 +8,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   DELETE_ACCOUT,
+  USER_NOT_LOADED,
 } from "../actions/action.types";
 import { UserType } from "../../global.types";
 
@@ -29,6 +30,14 @@ const authReducer = (
         isAuthenticated: true,
         loading: false,
         user: action.payload,
+      };
+
+    case USER_NOT_LOADED:
+      return {
+        ...state,
+        isAuthenticated: false,
+        loading: false,
+        user: null,
       };
 
     case SIGNUP_SUCCESS:
