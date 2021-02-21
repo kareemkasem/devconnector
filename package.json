@@ -8,7 +8,7 @@
 	"scripts": {
 		"start": "ts-node index.ts",
 		"dev": "nodemon --exec ts-node index.ts",
-		"heroku-postbuild": "yarn install --prefix client  ;yarn build --prefix client"
+		"heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix client; yarn build --prefix client"
 	},
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
