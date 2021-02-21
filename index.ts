@@ -6,13 +6,12 @@ import applyMiddleWares from "./config/middlewares";
 
 const app = express();
 applyMiddleWares(app);
-app.use(express.json());
 connectRoutes(app);
 
 try {
-  connectDB();
-  app.listen(process.env.PORT || 4000);
+	connectDB();
+	app.listen(process.env.PORT || 4000);
 } catch (error) {
-  console.log("failed to connect");
-  process.exit();
+	console.log("failed to connect");
+	process.exit();
 }
