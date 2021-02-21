@@ -6,9 +6,9 @@
 	"author": "kareem kasem",
 	"license": "MIT",
 	"scripts": {
-		"start": "ts-node index.ts",
+		"start": "node index.js",
 		"dev": "nodemon --exec ts-node index.ts",
-		"heroku-postbuild": "cd client && yarn install && yarn build"
+		"heroku-postbuild": "tsc && cd client && yarn install && yarn build"
 	},
 	"engines": {
 		"node": "14.15.4"
